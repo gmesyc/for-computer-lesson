@@ -21,7 +21,36 @@
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative; /* 供按鈕或相對定位參考 */
         }
+        
+        /* 新增：頂部導覽列與回首頁按鈕樣式 */
+        .header-nav {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: transparent;
+            color: #f1c40f;
+            border: 2px solid #f1c40f;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95em;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-home:hover {
+            background-color: #f1c40f;
+            color: #1f1f1f;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4);
+        }
+
         h1 {
             text-align: center;
             color: #f1c40f;
@@ -77,6 +106,13 @@
 <body>
 
 <div class="container">
+    <!-- 回首頁按鈕（請自行將 index.html 改為你的首頁網址） -->
+    <div class="header-nav">
+        <a href="index.html" class="btn-home">
+            &#8962; 回首頁
+        </a>
+    </div>
+
     <h1>電腦課專用</h1>
     <h2>好站推薦</h2>
     <table>

@@ -14,61 +14,91 @@
             margin: 0;
             padding: 20px 0;
         }
+        .container-custom {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        /* 導覽列與按鈕樣式比照好站推薦風格 */
         .navbar-custom {
-            background-color: #1f1f1f;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background-color: transparent;
+            padding: 0;
+            margin-bottom: 20px;
         }
         .nav-link-custom {
-            color: #ffffff;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin: 0 5px;
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            color: #f1c40f;
+            border: 2px solid #f1c40f;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95em;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s ease-in-out;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
         .nav-link-custom:hover {
-            background-color: #555555;
-            color: #f1c40f;
+            background-color: #f1c40f;
+            color: #1f1f1f;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4);
         }
         .nav-link-custom.active {
             background-color: #f1c40f;
             color: #1f1f1f;
-            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4);
         }
-        .header-banner {
-            background-color: #1f1f1f;
-            color: #f1c40f;
-            padding: 40px 0;
-            border-bottom: 2px solid #555;
-            margin-bottom: 30px;
-        }
-        .header-banner p {
-            color: #f39c12;
-        }
+        /* 標題與容器風格 */
         .card-custom {
             background-color: #3e3e3e;
             border: none;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            color: #ffffff;
+            padding: 25px;
         }
+        h1.main-title {
+            text-align: center;
+            color: #f1c40f;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+        h2.sub-title {
+            text-align: center;
+            color: #f39c12;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #555;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        /* 表格風格比照好站推薦 */
         .resource-table {
-            background-color: #3e3e3e;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
             color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
         }
         .resource-table th {
             background-color: #1f1f1f;
             color: #f1c40f;
-            padding: 14px;
+            font-size: 1.1em;
+            padding: 12px 15px;
             border-bottom: 1px solid #555;
+            text-align: left;
         }
         .resource-table td {
-            padding: 12px 16px;
-            vertical-align: middle;
+            padding: 12px 15px;
+            text-align: left;
             border-bottom: 1px solid #555;
+            vertical-align: middle;
             color: #ffffff;
         }
         .resource-table tbody tr:nth-child(even) {
@@ -77,18 +107,18 @@
         .resource-table tbody tr:hover {
             background-color: #555555;
         }
-        a.btn-custom-link {
+        /* 表格內連結風格 */
+        a.table-link {
             color: #f1c40f;
-            border: 1px solid #f1c40f;
-            background-color: transparent;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-        a.btn-custom-link:hover {
-            background-color: #f1c40f;
-            color: #1f1f1f;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
         }
+        a.table-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        /* 警示與分隔區塊 */
         .notice-box {
             background-color: #1f1f1f;
             border-left: 5px solid #e74c3c;
@@ -97,18 +127,16 @@
             margin-bottom: 25px;
             color: #ffffff;
         }
-        .notice-box strong {
-            color: #f39c12;
-        }
         .section-divider {
-            background-color: #2980b9;
-            color: #ffffff;
+            background-color: #1f1f1f;
+            color: #f39c12;
+            border: 1px solid #f39c12;
             text-align: center;
             font-weight: bold;
             padding: 10px;
             border-radius: 6px;
-            margin: 25px 0 15px 0;
-            font-size: 1.2rem;
+            margin: 30px 0 20px 0;
+            font-size: 1.1rem;
         }
         footer {
             background-color: #1f1f1f;
@@ -121,30 +149,20 @@
 </head>
 <body>
 
-    <!-- 頂部標頭 -->
-    <header class="header-banner text-center">
-        <div class="container">
-            <h1 class="fw-bold mb-2"><i class="fa-solid fa-laptop-code me-2"></i>影音剪輯素材分享</h1>
-                    </div>
-    </header>
-
-    <!-- 獨立 HTML 導覽選單 -->
-    <div class="container mb-4">
-        <div class="d-flex justify-content-center">
-            <nav class="navbar navbar-expand p-2 rounded-3 navbar-custom">
-                <div class="navbar-nav">
-                    <a class="nav-link-custom" href="index.html"><i class="fa-solid fa-house me-2"></i>首頁</a>
-                    <a class="nav-link-custom" href="recommend.html"><i class="fa-solid fa-thumbs-up me-2"></i>好站推薦</a>
-                    <a class="nav-link-custom active" href="media.html"><i class="fa-solid fa-photo-film me-2"></i>影音剪輯素材分享</a>
-                </div>
-            </nav>
+    <div class="container-custom px-3">
+        
+        <!-- 導覽選單按鈕 -->
+        <div class="navbar-custom d-flex flex-wrap">
+            <a class="nav-link-custom" href="index.html"><i class="fa-solid fa-house me-2"></i>首頁</a>
+            <a class="nav-link-custom" href="recommend.html"><i class="fa-solid fa-thumbs-up me-2"></i>好站推薦</a>
+            <a class="nav-link-custom active" href="media.html"><i class="fa-solid fa-photo-film me-2"></i>影音剪輯素材分享</a>
         </div>
-    </div>
 
-    <!-- 影音素材主要內容 -->
-    <div class="container">
-        <div class="card card-custom p-4 mb-4">
-            <h3 class="fw-bold mb-3" style="color: #f1c40f;"><i class="fa-solid fa-film me-2"></i>影音剪輯素材分享</h3>
+        <!-- 主要內容卡片區塊 -->
+        <div class="card-custom">
+            
+            <h1 class="main-title"><i class="fa-solid fa-laptop-code me-2"></i>電腦課專用</h1>
+            <h2 class="sub-title"><i class="fa-solid fa-film me-2"></i>影音剪輯素材分享</h2>
             
             <div class="notice-box text-center">
                 <p class="mb-2 fw-bold fs-5">盡量避免使用私人照片或影片到以下網站</p>
@@ -160,52 +178,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><a href="https://clipchamp.com/en/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Clipchamp</a></td><td><strong>線上影片剪輯 (用google帳號登入)</strong></td></tr>
-                        <tr><td><a href="https://toolbox.googleapps.com/apps/screen_recorder/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>連結點我</a></td><td><strong>Google網頁板螢幕錄影</strong></td></tr>
-                        <tr><td><a href="https://www.irasutoya.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>插圖屋</a></td><td><strong>日本網站，免費提供各類型插圖使用</strong></td></tr>
-                        <tr><td><a href="https://y2mate.lol/en158/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>youtube 下載</a></td><td><strong>下載 (mp3音樂 mp4影片)(僅供教學使用)</strong></td></tr>
-                        <tr><td><a href="https://stocktune.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>StockTune</a></td><td><strong>免費線上音樂下載，可商用，可以免標註出處</strong></td></tr>
-                        <tr><td><a href="https://www.jamendo.com/start" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Jamendo Music</a></td><td><strong>免費合法使用的音樂庫</strong></td></tr>
-                        <tr><td><a href="https://www.apowersoft.tw/heic-to-jpg" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>圖片 HEIC 格式轉 JPG</a></td><td><strong>圖片 HEIC 格式轉 JPG (盡量避免用私人照片)</strong></td></tr>
-                        <tr><td><a href="https://audiotrimmer.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>mp3音樂線上剪輯</a></td><td><strong>線上剪裁 MP3 音響檔案</strong></td></tr>
-                        <tr><td><a href="https://audio-joiner.com/tw/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://audio-joiner.com/tw/</a></td><td><strong>MP3 音樂合併 (請勿使用機密音檔)</strong></td></tr>
-                        <tr><td><a href="https://app.suno.ai/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Suno AI</a></td><td><strong>AI生成音樂加歌詞，中文也行。一天可生成10首</strong></td></tr>
-                        <tr><td><a href="https://gamma.app/zh-tw" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Gamma</a></td><td><strong>自動生成簡報</strong></td></tr>
-                        <tr><td><a href="https://www.flexclip.com/tw/tools/auto-subtitle/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>FlexClip AI字幕</a></td><td><strong>AI 字幕生成</strong></td></tr>
-                        <tr><td><a href="https://www.canva.com/zh_tw/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>canva</a></td><td><strong>大量免費設計簡報與各項平面設計</strong></td></tr>
-                        <tr><td><a href="https://www.miricanvas.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>MiriCanvas</a></td><td><strong>韓系設計風格的Canva，免費可商用</strong></td></tr>
-                        <tr><td><a href="https://aitools.rdlab.tw/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>AI設計工具門</a></td><td><strong>設計類AI的彙整網站</strong></td></tr>
-                        <tr><td><a href="https://auth.services.adobe.com/zh_HANT/index.html?callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2Fprojectx_webapp%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Fnew.express.adobe.com%252F%253Flocale%253Dzh-tw%2526_branch_match_id%253D1326564501549213705%2526_branch_referrer%253DH4sIAAAAAAAAA8soKSkottLXT0zJT0otLkgsyi7ILy7RSywo0MvJzMvWd%25252FcqcgpwCw13ckqyz8lPTsxJta3K0C0pBwD7gshWOAAAAA%25253D%25253D%2523old_hash%253Dotp%253D427153800%2526from_ims%253Dtrue%2526client_id%253Dprojectx_webapp%2526api%253Dauthorize%2526scope%253Dab.manage%252CAdobeID%252Copenid%252Cread_organizations%252Ccreative_cloud%252Ccreative_sdk%252Ctk_platform%252Ctk_platform_sync%252Caf_byof%252Cstk.a.license_skip.r%252Cstk.a.limited_license.cru%252Cadditional_info.optionalAgreements%252Cuds_read%252Cuds_write%252Caf_ltd_projectx%252Cunified_dev_portal%252Cadditional_info.ownerOrg%252Cadditional_info.roles%252Cadditional_info.roles%252CDCAPI%252Cadditional_info.auth_source%252Cadditional_info.authenticatingAccount%252Cpps.write%252Cpps.delete%252Ctk_platform_grant_free_subscription%252Cpps.read%252Cfirefly_api%252Cadditional_info.projectedProductContext%252Cadobeio.appregistry.read%252Cadobeio.appregistry.write%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.40.0-4-gdb4f7dc%2522%252C%2522nonce%2522%253A%25223606202694340018%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&amp;client_id=projectx_webapp&amp;scope=ab.manage%2CAdobeID%2Copenid%2Cread_organizations%2Ccreative_cloud%2Ccreative_sdk%2Ctk_platform%2Ctk_platform_sync%2Caf_byof%2Cstk.a.license_skip.r%2Cstk.a.limited_license.cru%2Cadditional_info.optionalAgreements%2Cuds_read%2Cuds_write%2Caf_ltd_projectx%2Cunified_dev_portal%2Cadditional_info.ownerOrg%2Cadditional_info.roles%2CDCAPI%2Cadditional_info.auth_source%2Cadditional_info.authenticatingAccount%2Cpps.write%2Cpps.delete%2Ctk_platform_grant_free_subscription%2Cpps.read%2Cfirefly_api%2Cadditional_info.projectedProductContext%2Cadobeio.appregistry.read%2Cadobeio.appregistry.write&amp;state=%7B%22jslibver%22%3A%22v2-v0.40.0-4-gdb4f7dc%22%2C%22nonce%22%3A%223606202694340018%22%7D&amp;relay=f901d3d3-12eb-41c8-8466-05f02aad7b58&amp;locale=zh_HANT&amp;flow_type=token&amp;dctx_id=v%3A2%2Cs%2Cdcp-r%2Cbg%3Aexpress2024%2C45faecb0-e687-11ee-a865-f545a8ca5d2c&amp;idp_flow_type=login&amp;s_p=google%2Cfacebook%2Capple%2Cmicrosoft&amp;response_type=token&amp;code_challenge_method=plain&amp;redirect_uri=https%3A%2F%2Fnew.express.adobe.com%2F%3Flocale%3Dzh-tw%26_branch_match_id%3D1326564501549213705%26_branch_referrer%3DH4sIAAAAAAAAA8soKSkottLXT0zJT0otLkgsyi7ILy7RSywo0MvJzMvWd%252FcqcgpwCw13ckqyz8lPTsxJta3K0C0pBwD7gshWOAAAAA%253D%253D%23old_hash%3Dotp%3D427153800%26from_ims%3Dtrue%26client_id%3Dprojectx_webapp%26api%3Dauthorize%26scope%3Dab.manage%2CAdobeID%2Copenid%2Cread_organizations%2Ccreative_cloud%2Ccreative_sdk%2Ctk_platform%2Ctk_platform_sync%2Caf_byof%2Cstk.a.license_skip.r%2Cstk.a.limited_license.cru%2Cadditional_info.optionalAgreements%2Cuds_read%2Cuds_write%2Caf_ltd_projectx%2Cunified_dev_portal%2Cadditional_info.ownerOrg%2Cadditional_info.roles%2Cadditional_info.roles%2CDCAPI%2Cadditional_info.auth_source%2Cadditional_info.authenticatingAccount%2Cpps.write%2Cpps.delete%2Ctk_platform_grant_free_subscription%2Cpps.read%2Cfirefly_api%2Cadditional_info.projectedProductContext%2Cadobeio.appregistry.read%2Cadobeio.appregistry.write&amp;use_ms_for_expiry=true#/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Adobe Express</a></td><td><strong>免費的線上相片和設計工具</strong></td></tr>
-                        <tr><td><a href="https://mixkit.co/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://mixkit.co/</a></td><td><strong>免費可商用的高畫質影片素材庫</strong></td></tr>
-                        <tr><td><a href="https://www.everypixel.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://www.everypixel.com/</a></td><td><strong>免費圖片素材搜尋引擎</strong></td></tr>
-                        <tr><td><a href="https://tenor.com/zh-TW/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>tenor GIF</a></td><td><strong>GIF動圖素材 (要打英文搜尋你要的素材)</strong></td></tr>
-                        <tr><td><a href="https://unsplash.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://unsplash.com/</a></td><td><strong>免費合法用的高畫質圖庫</strong></td></tr>
-                        <tr><td><a href="https://mockup.photos/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://mockup.photos/</a></td><td><strong>免費1500張海報、筆記、手機、筆電合成照，自動套用</strong></td></tr>
-                        <tr><td><a href="http://flat-icon-design.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Flat icon design</a></td><td><strong>免費可商用的平面圖片網站</strong></td></tr>
-                        <tr><td><a href="https://undraw.co/search" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>unDraw</a></td><td><strong>免費使用的圖片網站</strong></td></tr>
-                        <tr><td><a href="https://stampo.fun/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>STAMPO</a></td><td><strong>免費不可商用的日系可愛圖片網站，可以下載去背圖片</strong></td></tr>
-                        <tr><td><a href="https://www.pakutaso.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>pakutaso</a></td><td><strong>免費可商用圖片網站，日系與亞洲風格</strong></td></tr>
-                        <tr><td><a href="https://www.foodiesfeed.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>foodiesfeed</a></td><td><strong>免費可商用圖片網站，食物為主，要標示來源</strong></td></tr>
-                        <tr><td><a href="https://kaboompics.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>kaboompics</a></td><td><strong>免費可商用圖片網站</strong></td></tr>
-                        <tr><td><a href="https://free-paper-texture.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Paper-co</a></td><td><strong>免費可商用的日系紙張配色網站</strong></td></tr>
-                        <tr><td><a href="https://zh-tw.ac-illust.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>illustAC</a></td><td><strong>免費可商用的韓系插圖及背景圖網站</strong></td></tr>
-                        <tr><td><a href="https://pixlr.com/tw/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://pixlr.com/tw/</a></td><td><strong>線上快速編輯照片</strong></td></tr>
-                        <tr><td><a href="https://pixlr.com/tw/remove-background/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Pixlr Remove BG</a></td><td><strong>線上移除圖片背景</strong></td></tr>
-                        <tr><td><a href="https://www.photoroom.com/tools/remove-object-from-photo/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Magic Retouch</a></td><td><strong>刪除人物、物品，留下背景</strong></td></tr>
-                        <tr><td><a href="https://www.photoroom.com/background-remover/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Background Remover</a></td><td><strong>線上AI去背，留下人像</strong></td></tr>
-                        <tr><td><a href="https://www.remove.bg" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://www.remove.bg/</a></td><td><strong>AI去背</strong></td></tr>
-                        <tr><td><a href="https://www.fococlipping.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Remove Background Online</a></td><td><strong>線上移除圖片背景</strong></td></tr>
-                        <tr><td><a href="https://removal.ai/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>https://removal.ai/</a></td><td><strong>線上移除圖片背景</strong></td></tr>
-                        <tr><td><a href="https://www.adobe.com/express/feature/image/remove-background" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>adobe 線上移除背景</a></td><td><strong>如題</strong></td></tr>
-                        <tr><td><a href="https://www.photoroom.com/zh-tw/tools/background-remover" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>PhotoRoom背景移除器</a></td><td><strong>線上移除背景</strong></td></tr>
-                        <tr><td><a href="https://cleanup.pictures/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Cleanup Pitcures</a></td><td><strong>移除照片中主角</strong></td></tr>
-                        <tr><td><a href="https://www.unscreen.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>unscreen</a></td><td><strong>移除影片或gif的背景</strong></td></tr>
+                        <tr><td><a href="https://clipchamp.com/en/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Clipchamp</a></td><td><strong>線上影片剪輯 (用google帳號登入)</strong></td></tr>
+                        <tr><td><a href="https://toolbox.googleapps.com/apps/screen_recorder/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>連結點我</a></td><td><strong>Google網頁板螢幕錄影</strong></td></tr>
+                        <tr><td><a href="https://www.irasutoya.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>插圖屋</a></td><td><strong>日本網站，免費提供各類型插圖使用</strong></td></tr>
+                        <tr><td><a href="https://y2mate.lol/en158/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>youtube 下載</a></td><td><strong>下載 (mp3音樂 mp4影片)(僅供教學使用)</strong></td></tr>
+                        <tr><td><a href="https://stocktune.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>StockTune</a></td><td><strong>免費線上音樂下載，可商用，可以免標註出處</strong></td></tr>
+                        <tr><td><a href="https://www.jamendo.com/start" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Jamendo Music</a></td><td><strong>免費合法使用的音樂庫</strong></td></tr>
+                        <tr><td><a href="https://www.apowersoft.tw/heic-to-jpg" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>圖片 HEIC 格式轉 JPG</a></td><td><strong>圖片 HEIC 格式轉 JPG (盡量避免用私人照片)</strong></td></tr>
+                        <tr><td><a href="https://audiotrimmer.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>mp3音樂線上剪輯</a></td><td><strong>線上剪裁 MP3 音響檔案</strong></td></tr>
+                        <tr><td><a href="https://audio-joiner.com/tw/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Audio Joiner</a></td><td><strong>MP3 音樂合併 (請勿使用機密音檔)</strong></td></tr>
+                        <tr><td><a href="https://app.suno.ai/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Suno AI</a></td><td><strong>AI生成音樂加歌詞，中文也行。一天可生成10首</strong></td></tr>
+                        <tr><td><a href="https://gamma.app/zh-tw" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Gamma</a></td><td><strong>自動生成簡報</strong></td></tr>
+                        <tr><td><a href="https://www.flexclip.com/tw/tools/auto-subtitle/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>FlexClip AI字幕</a></td><td><strong>AI 字幕生成</strong></td></tr>
+                        <tr><td><a href="https://www.canva.com/zh_tw/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>canva</a></td><td><strong>大量免費設計簡報與各項平面設計</strong></td></tr>
+                        <tr><td><a href="https://www.miricanvas.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>MiriCanvas</a></td><td><strong>韓系設計風格的Canva，免費可商用</strong></td></tr>
+                        <tr><td><a href="https://aitools.rdlab.tw/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>AI設計工具門</a></td><td><strong>設計類AI的彙整網站</strong></td></tr>
+                        <tr><td><a href="https://auth.services.adobe.com/zh_HANT/index.html" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Adobe Express</a></td><td><strong>免費的線上相片和設計工具</strong></td></tr>
+                        <tr><td><a href="https://mixkit.co/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Mixkit</a></td><td><strong>免費可商用的高畫質影片素材庫</strong></td></tr>
+                        <tr><td><a href="https://www.everypixel.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Everypixel</a></td><td><strong>免費圖片素材搜尋引擎</strong></td></tr>
+                        <tr><td><a href="https://tenor.com/zh-TW/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>tenor GIF</a></td><td><strong>GIF動圖素材 (要打英文搜尋你要的素材)</strong></td></tr>
+                        <tr><td><a href="https://unsplash.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Unsplash</a></td><td><strong>免費合法用的高畫質圖庫</strong></td></tr>
+                        <tr><td><a href="https://mockup.photos/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Mockup Photos</a></td><td><strong>免費1500張海報、筆記、手機、筆電合成照，自動套用</strong></td></tr>
+                        <tr><td><a href="http://flat-icon-design.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Flat icon design</a></td><td><strong>免費可商用的平面圖片網站</strong></td></tr>
+                        <tr><td><a href="https://undraw.co/search" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>unDraw</a></td><td><strong>免費使用的圖片網站</strong></td></tr>
+                        <tr><td><a href="https://stampo.fun/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>STAMPO</a></td><td><strong>免費不可商用的日系可愛圖片網站，可以下載去背圖片</strong></td></tr>
+                        <tr><td><a href="https://www.pakutaso.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>pakutaso</a></td><td><strong>免費可商用圖片網站，日系與亞洲風格</strong></td></tr>
+                        <tr><td><a href="https://www.foodiesfeed.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>foodiesfeed</a></td><td><strong>免費可商用圖片網站，食物為主，要標示來源</strong></td></tr>
+                        <tr><td><a href="https://kaboompics.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>kaboompics</a></td><td><strong>免費可商用圖片網站</strong></td></tr>
+                        <tr><td><a href="https://free-paper-texture.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Paper-co</a></td><td><strong>免費可商用的日系紙張配色網站</strong></td></tr>
+                        <tr><td><a href="https://zh-tw.ac-illust.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>illustAC</a></td><td><strong>免費可商用的韓系插圖及背景圖網站</strong></td></tr>
+                        <tr><td><a href="https://pixlr.com/tw/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Pixlr</a></td><td><strong>線上快速編輯照片</strong></td></tr>
+                        <tr><td><a href="https://pixlr.com/tw/remove-background/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Pixlr Remove BG</a></td><td><strong>線上移除圖片背景</strong></td></tr>
+                        <tr><td><a href="https://www.photoroom.com/tools/remove-object-from-photo/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Magic Retouch</a></td><td><strong>刪除人物、物品，留下背景</strong></td></tr>
+                        <tr><td><a href="https://www.photoroom.com/background-remover/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Background Remover</a></td><td><strong>線上AI去背，留下人像</strong></td></tr>
+                        <tr><td><a href="https://www.remove.bg" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Remove.bg</a></td><td><strong>AI去背</strong></td></tr>
+                        <tr><td><a href="https://www.fococlipping.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Remove Background Online</a></td><td><strong>線上移除圖片背景</strong></td></tr>
+                        <tr><td><a href="https://removal.ai/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Removal.ai</a></td><td><strong>線上移除圖片背景</strong></td></tr>
+                        <tr><td><a href="https://www.adobe.com/express/feature/image/remove-background" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Adobe 線上移除背景</a></td><td><strong>如題</strong></td></tr>
+                        <tr><td><a href="https://www.photoroom.com/zh-tw/tools/background-remover" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>PhotoRoom背景移除器</a></td><td><strong>線上移除背景</strong></td></tr>
+                        <tr><td><a href="https://cleanup.pictures/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Cleanup Pitcures</a></td><td><strong>移除照片中主角</strong></td></tr>
+                        <tr><td><a href="https://www.unscreen.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Unscreen</a></td><td><strong>移除影片或gif的背景</strong></td></tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- 分隔標頭 -->
-            <div class="section-divider">以下AI工具的咒語建議用英文</div>
+            <div class="section-divider"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>以下 AI 工具的咒語建議用英文</div>
 
             <div class="table-responsive mb-4">
                 <table class="table align-middle resource-table">
@@ -216,17 +234,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td><a href="https://stablediffusionweb.com/#demo" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Stable Diffusion</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
-                        <tr><td><a href="https://dream.ai/create" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Dream by Wombo</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
-                        <tr><td><a href="https://perchance.org/ai-text-to-image-generator" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Perchance AI Image Generator</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
-                        <tr><td><a href="https://www.artguru.ai/tw/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Artguru AI</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
-                        <tr><td><a href="https://www.craiyon.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Craiyon</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
-                        <tr><td><a href="https://sketch.metademolab.com/canvas" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Animated Drawings</a></td><td><strong>AI 線上塗鴉圖片轉動畫</strong></td></tr>
-                        <tr><td><a href="https://skybox.blockadelabs.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Skybox</a></td><td><strong>線上生成3D場景圖片，免費帳號一個月15張圖額度</strong></td></tr>
-                        <tr><td><a href="https://www.krea.ai/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Krea AI</a></td><td><strong>畫圖自動生成厲害(應該)的作品</strong></td></tr>
-                        <tr><td><a href="https://lumalabs.ai/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Luma Dream Machine</a></td><td><strong>放圖片加上咒語，自動轉變成影片</strong></td></tr>
-                        <tr><td><a href="https://websim.ai/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>websim.ai</a></td><td><strong>AI生成各式樣網頁</strong></td></tr>
-                        <tr><td><a href="https://suno.com/" target="_blank" class="btn btn-sm btn-custom-link"><i class="fa-solid fa-link me-1"></i>Suno</a></td><td><strong>生成音樂</strong></td></tr>
+                        <tr><td><a href="https://stablediffusionweb.com/#demo" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Stable Diffusion</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
+                        <tr><td><a href="https://dream.ai/create" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Dream by Wombo</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
+                        <tr><td><a href="https://perchance.org/ai-text-to-image-generator" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Perchance AI Image Generator</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
+                        <tr><td><a href="https://www.artguru.ai/tw/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Artguru AI</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
+                        <tr><td><a href="https://www.craiyon.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Craiyon</a></td><td><strong>線上免費免登入AI生成圖片(速度慢、要用英文咒語)</strong></td></tr>
+                        <tr><td><a href="https://sketch.metademolab.com/canvas" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Animated Drawings</a></td><td><strong>AI 線上塗鴉圖片轉動畫</strong></td></tr>
+                        <tr><td><a href="https://skybox.blockadelabs.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Skybox</a></td><td><strong>線上生成3D場景圖片，免費帳號一個月15張圖額度</strong></td></tr>
+                        <tr><td><a href="https://www.krea.ai/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Krea AI</a></td><td><strong>畫圖自動生成厲害(應該)的作品</strong></td></tr>
+                        <tr><td><a href="https://lumalabs.ai/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Luma Dream Machine</a></td><td><strong>放圖片加上咒語，自動轉變成影片</strong></td></tr>
+                        <tr><td><a href="https://websim.ai/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>websim.ai</a></td><td><strong>AI生成各式樣網頁</strong></td></tr>
+                        <tr><td><a href="https://suno.com/" target="_blank" class="table-link"><i class="fa-solid fa-link me-1"></i>Suno</a></td><td><strong>生成音樂</strong></td></tr>
                     </tbody>
                 </table>
             </div>

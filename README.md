@@ -1,14 +1,14 @@
-# 💻 電腦課專用 - 資訊課數位學習資源網
+# 💻 電腦課專用
 # Computer Lesson Resource Hub
 
 > **簡介**：專為電腦課與資訊教育設計的線上學習資源網，整合精選好站、打字練習、程式教學、免費圖庫與 AI 創作工具。  
 > **Description**: A curated resource platform designed for computer technology classes, integrating educational tools, typing practice, coding platforms, free media assets, and AI tools.
 
-🌐 **網站即時預覽 (Live Site)**：[https://gmesyc.github.io/for-computer-lesson/](https://gmesyc.github.io/for-computer-lesson/)
+🌐 **網站 (Site)**：[https://gmesyc.github.io/for-computer-lesson/](https://gmesyc.github.io/for-computer-lesson/)
 
 ---
 
-## 📌 繁體中文說明 (Chinese Guide)
+## 📌 正體中文說明 (Traditional Chinese Guide)
 
 ### 🌟 網站特色
 * **一站式學習入口**：提供明確的分類指引，適合學生自主學習與教師教學引導。

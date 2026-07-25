@@ -18,10 +18,13 @@
 
 ### 📁 目錄與頁面結構
 ```plaintext
+```plaintext
 for-computer-lesson/
 ├── index.html         # 網站首頁與快速導覽列
+├── about.html         # 關於我 (創作者簡介、教學理念與聯絡資訊)
 ├── recommend.html     # 好站推薦 (打字、程式、益智學習)
 ├── media.html         # 影音剪輯素材與 AI 工具分享
+├── images/            # 網站圖片與個人大頭貼資料夾
 ├── sitemap.xml        # Google 搜尋引擎 Sitemap 地圖
 └── README.md          # 專案說明文件
 ```
@@ -39,11 +42,13 @@ for-computer-lesson/
 ### 📁 Repository Structure
 ```plaintext
 for-computer-lesson/
-├── index.html         # Main portal page with quick navigation
-├── recommend.html     # Recommended educational & coding websites
-├── media.html         # Video editing, free media assets & AI tools
-├── sitemap.xml        # Sitemap for search engine indexing
-└── README.md          # Project documentation
+├── index.html         # 網站首頁與快速導覽列
+├── about.html         # 關於我 (創作者簡介、教學理念與聯絡資訊)
+├── recommend.html     # 好站推薦 (打字、程式、益智學習)
+├── media.html         # 影音剪輯素材與 AI 工具分享
+├── images/            # 網站圖片與個人大頭貼資料夾
+├── sitemap.xml        # Google 搜尋引擎 Sitemap 地圖
+└── README.md          # 專案說明文件
 ```
 
 ---

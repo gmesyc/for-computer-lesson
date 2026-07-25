@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <!-- Google 搜尋驗證碼 -->
-    <meta name="google-site-verification" content="5t7AEdpChuhBJ5Md5lxJaiwJv_dLrNuTC2p88Nj6IPo" />
+    <meta name="google-site-verification" content="5t7AEdpChuhBJ5Md5laiJv_dLrNuTC2p88Nj6IPo" />
     <link rel="canonical" href="https://gmesyc.github.io/for-computer-lesson/" />  
     
     <meta charset="UTF-8">
@@ -63,10 +63,7 @@
             text-decoration: none; 
             transition: all 0.2s ease-in-out; 
         }
-        .nav-link-custom:hover { 
-            background-color: #f1c40f; 
-            color: #1f1f1f; 
-        }
+        .nav-link-custom:hover,
         .nav-link-custom.active { 
             background-color: #f1c40f; 
             color: #1f1f1f; 
@@ -84,63 +81,39 @@
             color: #f39c12 !important;
         }
 
-        /* 卡片與區塊風格 */
+        /* 主內容卡片風格 */
         .card-custom { 
             background-color: #3e3e3e; 
             color: #ffffff; 
             border: 1px solid #555; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-        }
-        .text-gold {
-            color: #f1c40f !important;
-        }
-        .text-accent {
-            color: #f39c12 !important;
-        }
-        .list-group-item {
-            background-color: #3e3e3e;
-            color: #ffffff;
-            border-color: #555;
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
         }
 
-        /* 標籤與按鈕樣式 */
+        .text-gold { color: #f1c40f !important; }
+        .text-accent { color: #f39c12 !important; }
+
+        /* 列表樣式 */
+        .list-group-item {
+            background-color: #343434;
+            color: #ffffff;
+            border-color: #555;
+            padding: 16px 20px;
+        }
+
+        /* 標籤樣式 */
         .tag-badge { 
             background-color: #4a4a4a; 
             color: #f1c40f; 
             border: 1px solid #666;
             font-size: 0.85rem; 
-            padding: 4px 10px; 
+            padding: 6px 14px; 
             border-radius: 20px; 
-            margin-right: 5px; 
-            margin-bottom: 5px; 
+            margin-right: 6px; 
+            margin-bottom: 8px; 
             display: inline-block; 
         }
-        .btn-gold {
-            background-color: #f1c40f;
-            color: #1f1f1f;
-            font-weight: bold;
-            border: none;
-            transition: all 0.2s ease-in-out;
-        }
-        .btn-gold:hover {
-            background-color: #f39c12;
-            color: #1f1f1f;
-            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4);
-        }
-        .btn-accent {
-            background-color: #e67e22;
-            color: #ffffff;
-            font-weight: bold;
-            border: none;
-            transition: all 0.2s ease-in-out;
-        }
-        .btn-accent:hover {
-            background-color: #d35400;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(230, 126, 34, 0.4);
-        }
-        
+
         /* 頁尾風格 */
         footer { 
             background-color: #1f1f1f; 
@@ -164,7 +137,7 @@
         </div>
     </header>
 
-    <!-- 獨立 HTML 導覽選單 -->
+    <!-- 頂部導覽選單（全站唯一的頁面切換處） -->
     <div class="container mb-4">
         <div class="d-flex justify-content-center">
             <nav class="navbar navbar-expand p-2 rounded-3 navbar-custom">
@@ -177,47 +150,60 @@
         </div>
     </div>
 
-    <!-- 首頁主要內容 -->
+    <!-- 首頁純說明內容區 -->
     <div class="container">
-        <div class="row g-4 mb-4">
-            <div class="col-md-8">
-                <div class="card card-custom p-4">
-                    <h3 class="fw-bold text-gold mb-3"><i class="fa-solid fa-bullhorn me-2"></i>歡迎來到資訊課數位學習網</h3>
-                    <p class="fs-5">本網站專為電腦課教學與數位學習設計，彙整線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。</p>
-                    <hr>
-                    <h5 class="fw-bold text-accent mb-3"><i class="fa-solid fa-circle-check text-warning me-2"></i>網站分頁說明：</h5>
-                    <ul class="list-group list-group-flush mb-4">
-                        <li class="list-group-item"><strong class="text-gold">【首頁】</strong> 平台總覽與快速快捷入口。</li>
-                        <li class="list-group-item"><strong class="text-gold">【好站推薦】</strong> 精選打字練習、程式設計 (Scratch/Code.org)、益智遊戲與教育資源。</li>
-                        <li class="list-group-item"><strong class="text-gold">【影音剪輯素材分享】</strong> 影片剪輯 (Clipchamp)、創用CC音樂、線上去背圖庫與 AI 繪圖創作工具。</li>
-                    </ul>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card card-custom p-4 p-md-5">
+                    
+                    <!-- 歡迎標題與簡介 -->
+                    <h2 class="fw-bold text-gold mb-3"><i class="fa-solid fa-bullhorn me-2"></i>歡迎來到資訊課數位學習網</h2>
+                    <p class="fs-5 lh-lg mb-4 text-light">
+                        本網站專為電腦課教學與數位學習設計，彙整線上程式學習、AI 創作工具以及各類免版權圖片與影音素材。請點擊上方導覽列切換至所需資源頁面。
+                    </p>
+
+                    <hr class="my-4">
+
+                    <!-- 分頁資源詳細說明列表 -->
+                    <h4 class="fw-bold text-accent mb-3"><i class="fa-solid fa-circle-info me-2"></i>分頁資源簡介</h4>
+                    <div class="list-group mb-4">
+                        <div class="list-group-item rounded-3 mb-3">
+                            <h5 class="fw-bold text-gold mb-2"><i class="fa-solid fa-thumbs-up me-2"></i>好站推薦</h5>
+                            <p class="mb-0 text-light">
+                                精選打字練習（英文/注音）、程式設計學習（Scratch、Code.org）、線上益智解謎遊戲以及各類國中小資訊課實用的教育資源。
+                            </p>
+                        </div>
+                        <div class="list-group-item rounded-3">
+                            <h5 class="fw-bold text-accent mb-2"><i class="fa-solid fa-photo-film me-2"></i>影音剪輯素材分享</h5>
+                            <p class="mb-0 text-light">
+                                收錄影片剪輯線上工具（Clipchamp）、創用 CC 免費音樂/音效庫、線上 AI 照片去背軟體與各種高品質免版權圖片/向量圖庫。
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
 
                     <!-- 熱門主題標籤區 -->
-                    <div class="mt-2">
-                        <h6 class="fw-bold text-accent mb-2"><i class="fa-solid fa-tags me-1"></i>熱門主題標籤：</h6>
-                        <span class="tag-badge">電腦課專用</span>
-                        <span class="tag-badge">Scratch 程式設計</span>
-                        <span class="tag-badge">Code.org</span>
-                        <span class="tag-badge">線上打字練習</span>
-                        <span class="tag-badge">Canva 簡報</span>
-                        <span class="tag-badge">AI 去背軟體</span>
-                        <span class="tag-badge">免費圖庫素材</span>
+                    <div>
+                        <h5 class="fw-bold text-gold mb-3"><i class="fa-solid fa-tags me-2"></i>熱門主題標籤</h5>
+                        <div>
+                            <span class="tag-badge">電腦課專用</span>
+                            <span class="tag-badge">Scratch 程式設計</span>
+                            <span class="tag-badge">Code.org</span>
+                            <span class="tag-badge">線上打字練習</span>
+                            <span class="tag-badge">Canva 簡報</span>
+                            <span class="tag-badge">AI 去背軟體</span>
+                            <span class="tag-badge">免費圖庫素材</span>
+                            <span class="tag-badge">Clipchamp 剪輯</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="card card-custom p-4">
-                    <h4 class="fw-bold text-gold mb-3"><i class="fa-solid fa-star text-warning me-2"></i>學習快捷頁面</h4>
-                    <div class="d-grid gap-3">
-                        <a href="recommend.html" class="btn btn-gold btn-lg text-start"><i class="fa-solid fa-thumbs-up me-2"></i>好站推薦</a>
-                        <a href="media.html" class="btn btn-accent btn-lg text-start"><i class="fa-solid fa-photo-film me-2"></i>影音剪輯與素材</a>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 頁尾 -->
     <footer class="text-center">
         <div class="container">
             <p class="mb-1">電腦課專用首頁 portal</p>

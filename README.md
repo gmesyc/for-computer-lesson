@@ -49,8 +49,10 @@ for-computer-lesson/
 ---
 
 ## ⚠️ 版權與使用聲明 (Copyright & Notice)
-* 本平台僅整理並提供公開資源與工具之超連結。
-* 使用各第三方素材與 AI 工具時，請務必遵守各原網站之版權授權條款（如 CC 授權、商用規範等）。
+* **本平台僅整理並提供公開資源與工具之超連結。**  
+  *This platform only aggregates and provides hyperlinks to publicly available resources and tools.*
+* **使用各第三方素材與 AI 工具時，請務必遵守各原網站之版權授權條款（如 CC 授權、商用規範等）。**  
+  *When using third-party assets and AI tools, please strictly abide by the respective copyright terms and licensing guidelines (e.g., CC licenses, commercial use policies, etc.).*
 
 ---
 

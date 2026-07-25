@@ -26,14 +26,6 @@ for-computer-lesson/
 └── README.md          # 專案說明文件
 
 
-🛠️ 使用技術
-前端框架：HTML5, CSS3, JavaScript
-
-UI 元件庫：Bootstrap 5 & Font Awesome 6
-
-網站託管：GitHub Pages
-
-搜尋優化：Google Search Console (Sitemap & Open Graph Setup)
 
 📌 English Guide
 🌟 Key Features
@@ -55,29 +47,8 @@ for-computer-lesson/
 ├── media.html         # Video editing, free media assets & AI tools
 ├── sitemap.xml        # Sitemap for search engine indexing
 └── README.md          # Project documentation
-🛠️ Tech Stack
-Frontend: HTML5, CSS3, JavaScript
-
-UI Frameworks: Bootstrap 5, Font Awesome 6
-
-Hosting: GitHub Pages
-
-SEO: Google Search Console integration, Canonical Tags, Open Graph Metadata
-
-🚀 本地開發與部署 (Local Setup & Deployment)
-複製專案 (Clone the repository)
-
-Bash
 
 
-git clone [https://github.com/gmesyc/for-computer-lesson.git](https://github.com/gmesyc/for-computer-lesson.git)
-本地瀏覽 (Run locally)
-
-直接在瀏覽器雙擊開啟 index.html 即可檢視。
-
-部署至 GitHub Pages (Deploy)
-
-將修改推送到 main 或 master 分支，並於 Repository Settings 的 Pages 選單啟動即可發布。
 
 ⚠️ 版權與使用聲明 (Copyright & Notice)
 本平台僅整理並提供公開資源與工具之超連結。

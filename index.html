@@ -4,22 +4,42 @@
     <!-- Google 搜尋驗證碼 -->
     <meta name="google-site-verification" content="5t7AEdpChuhBJ5Md5lxJaiwJv_dLrNuTC2p88Nj6IPo" />
     <link rel="canonical" href="https://gmesyc.github.io/for-computer-lesson/" />  
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電腦課專用</title>
+    <meta name="robots" content="index, follow">
 
-    <!-- SEO 搜尋引擎優化標籤 -->
-    <meta name="description" content="電腦課專用數位學習網，提供電腦課教學線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。">
-    <meta name="keywords" content="電腦課專用, 電腦課, 資訊教育, 好站推薦, 影音剪輯素材, 免費資源, AI工具">
+    <!-- 擴充 SEO 標題與描述 -->
+    <title>電腦課專用 - 資訊課數位學習網 | 線上好站推薦與影音素材</title>
+    <meta name="description" content="電腦課專用數位學習網，專為國中小資訊課與電腦課設計。提供線上程式學習(Scratch, Code.org)、打字練習、AI創作工具、免費圖庫與影音剪輯素材。">
+    <meta name="keywords" content="電腦課專用, 電腦課好站, 資訊教育, 程式學習, 影音剪輯素材, 免費資源, AI工具, 打字練習">
 
-    <!-- Open Graph 社群分享標籤（有助於 Google 搜尋卡片與社群預覽） -->
+    <!-- 網站圖示 Favicon（使用 emoji 轉 SVG 確保無須另外傳圖） -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
+    <!-- Open Graph 社群分享標籤 -->
     <meta property="og:title" content="電腦課專用 - 資訊課數位學習網">
-    <meta property="og:description" content="提供電腦課教學線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。">
+    <meta property="og:description" content="電腦課專用教學線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gmesyc.github.io/for-computer-lesson/">
+    <meta property="og:site_name" content="電腦課專用">
 
+    <!-- Google 結構化資料 (JSON-LD) - 告訴 Google 網站名稱與定位 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "電腦課專用",
+      "alternateName": "電腦課專用數位學習網",
+      "url": "https://gmesyc.github.io/for-computer-lesson/",
+      "description": "電腦課專用數位學習資源平台，提供好站推薦與影音剪輯素材。"
+    }
+    </script>
+
+    <!-- Bootstrap & FontAwesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body { font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; background-color: #f8f9fa; color: #333; }
         .navbar-custom { background-color: #1e293b; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -28,6 +48,7 @@
         .nav-link-custom.active { background-color: #0284c7; color: white; }
         .header-banner { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: white; padding: 40px 0; border-bottom: 4px solid #38bdf8; margin-bottom: 30px; }
         .card-custom { border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .tag-badge { background-color: #e2e8f0; color: #334155; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px; margin-right: 5px; margin-bottom: 5px; display: inline-block; }
         footer { background-color: #0f172a; color: #94a3b8; padding: 25px 0; margin-top: 50px; }
     </style>
 </head>
@@ -37,6 +58,7 @@
     <header class="header-banner text-center">
         <div class="container">
             <h1 class="fw-bold mb-2"><i class="fa-solid fa-laptop-code me-2"></i>電腦課專用</h1>
+            <p class="mb-0 text-info">資訊課數位學習與創作資源整合平台</p>
         </div>
     </header>
 
@@ -59,16 +81,29 @@
             <div class="col-md-8">
                 <div class="card card-custom p-4">
                     <h3 class="fw-bold text-primary mb-3"><i class="fa-solid fa-bullhorn me-2"></i>歡迎來到資訊課數位學習網</h3>
-                    <p class="fs-5">本網站提供電腦課教學的線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。</p>
+                    <p class="fs-5">本網站專為電腦課教學與數位學習設計，彙整線上學習資源、AI 創作工具以及各類免版權圖片與影音素材。</p>
                     <hr>
-                    <h5 class="fw-bold"><i class="fa-solid fa-circle-check text-success me-2"></i>網站分頁說明：</h5>
-                    <ul class="list-group list-group-flush mb-3">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-circle-check text-success me-2"></i>網站分頁說明：</h5>
+                    <ul class="list-group list-group-flush mb-4">
                         <li class="list-group-item"><strong class="text-primary">【首頁】</strong> 平台總覽與快速快捷入口。</li>
-                        <li class="list-group-item"><strong class="text-primary">【好站推薦】</strong> 精選打字練習、程式設計、閱讀與教育資源。</li>
-                        <li class="list-group-item"><strong class="text-primary">【影音剪輯素材分享】</strong> 影片剪輯、創用CC音樂、圖庫與 AI 創作工具。</li>
+                        <li class="list-group-item"><strong class="text-primary">【好站推薦】</strong> 精選打字練習、程式設計 (Scratch/Code.org)、益智遊戲與教育資源。</li>
+                        <li class="list-group-item"><strong class="text-primary">【影音剪輯素材分享】</strong> 影片剪輯 (Clipchamp)、創用CC音樂、線上去背圖庫與 AI 繪圖創作工具。</li>
                     </ul>
+
+                    <!-- 增加豐富度與搜尋引擎權重的關鍵字標籤區 -->
+                    <div class="mt-2">
+                        <h6 class="fw-bold text-muted mb-2"><i class="fa-solid fa-tags me-1"></i>熱門主題標籤：</h6>
+                        <span class="tag-badge">電腦課專用</span>
+                        <span class="tag-badge">Scratch 程式設計</span>
+                        <span class="tag-badge">Code.org</span>
+                        <span class="tag-badge">線上打字練習</span>
+                        <span class="tag-badge">Canva 簡報</span>
+                        <span class="tag-badge">AI 去背軟體</span>
+                        <span class="tag-badge">免費圖庫素材</span>
+                    </div>
                 </div>
             </div>
+            
             <div class="col-md-4">
                 <div class="card card-custom p-4 bg-light">
                     <h4 class="fw-bold mb-3"><i class="fa-solid fa-star text-warning me-2"></i>學習快捷頁面</h4>

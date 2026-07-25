@@ -4,7 +4,7 @@
 > **簡介**：專為電腦課與資訊教育設計的線上學習資源網，整合精選好站、打字練習、程式教學、免費圖庫與 AI 創作工具。  
 > **Description**: A curated resource platform designed for computer technology classes, integrating educational tools, typing practice, coding platforms, free media assets, and AI tools.
 
-🌐 **網站即時預覽 (Live Site)**：[https://gmesyc.github.io/for-computer-lesson/](https://gmesyc.github.io/for-computer-lesson/)
+🌐 **網站即時預覽 (Live Site)**：<a href="https://gmesyc.github.io/for-computer-lesson/" target="_blank" rel="noopener noreferrer">https://gmesyc.github.io/for-computer-lesson/</a>
 
 ---
 

@@ -27,6 +27,11 @@
         .text-gold { 
             color: #f1c40f !important; 
         }
+        /* 提升時間字體清晰度 */
+        .text-time {
+            color: #b0b8c4 !important;
+            font-size: 0.85rem;
+        }
         .msg-card { 
             background-color: #1f1f1f; 
             border-left: 4px solid #f1c40f; 
@@ -55,13 +60,19 @@
     <div class="card card-custom p-4 mb-5 shadow">
         <h3 class="fw-bold text-gold mb-3"><i class="fa-solid fa-pen-to-square me-2"></i>撰寫留言</h3>
         <form id="msg-form">
+            
+            <!-- 🛡️ 防護 1：蜜罐陷阱 (Honeypot) - 人類看不到，機器人填寫會被直接忽略 -->
+            <div style="display: none !important;">
+                <input type="text" id="hp-field" name="website_url_hp" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="mb-3">
                 <label for="input-name" class="form-label text-light">您的姓名 / 稱呼：</label>
-                <input type="text" id="input-name" class="form-control bg-dark text-light border-secondary" placeholder="例如：五年三班 小明" required>
+                <input type="text" id="input-name" class="form-control bg-dark text-light border-secondary" placeholder="例如：五年三班 小明" maxlength="30" required>
             </div>
             <div class="mb-3">
-                <label for="input-msg" class="form-label text-light">留言內容：</label>
-                <textarea id="input-msg" class="form-control bg-dark text-light border-secondary" rows="3" placeholder="請輸入想說的話..." required></textarea>
+                <label for="input-msg" class="form-label text-light">留言內容 (限 200 字以內)：</label>
+                <textarea id="input-msg" class="form-control bg-dark text-light border-secondary" rows="3" placeholder="請輸入想說的話..." maxlength="200" required></textarea>
             </div>
             <button type="submit" id="submit-btn" class="btn btn-warning fw-bold w-100">
                 <i class="fa-solid fa-paper-plane me-1"></i>發送留言
@@ -89,14 +100,14 @@
 </div>
 
 <script>
-    // 已設定您的 Google Apps Script Web App 網址
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbzi4GdnyIotPUChzczelEJFD7SeI8o4zJ5SwoJH-NJ9braLuV_AwF4TGfdR7ZcRZpYJ/exec";
+    // 已更新為您最新的 Google Apps Script Web App 網址
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbykY_-YNNC4_AUl8L-04KZRhvtacNUK2nVpQUswcGs_Pqu0Dqs0WVvcvS1OuErnlw5P/exec";
 
     // 1. 載入並顯示 Google Sheet 中的留言 (A, B, C欄)
     async function loadMessages() {
         const listDiv = document.getElementById('message-list');
         try {
-            // 加入時間戳記 prevent cache
+            // 加入時間戳記避免瀏覽器快取舊資料
             const res = await fetch(GAS_URL + "?t=" + new Date().getTime());
             const data = await res.json();
             
@@ -109,20 +120,39 @@
                 <div class="card msg-card p-3 shadow-sm">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <strong class="text-gold fs-5"><i class="fa-solid fa-user-circle me-1"></i>${escapeHtml(msg.name)}</strong>
-                        <small class="text-muted"><i class="fa-regular fa-clock me-1"></i>${escapeHtml(msg.time)}</small>
+                        <small class="text-time"><i class="fa-regular fa-clock me-1"></i>${escapeHtml(msg.time)}</small>
                     </div>
                     <p class="mb-0 text-light fs-6" style="white-space: pre-line;">${escapeHtml(msg.message)}</p>
                 </div>
             `).join('');
 
         } catch (err) {
-            listDiv.innerHTML = '<p class="text-center text-danger py-3"><i class="fa-solid fa-triangle-exclamation me-1"></i>讀取留言失敗。請確認 GAS 權限已設定為「所有人」，並於修改後「建立新版本」重新部署。</p>';
+            listDiv.innerHTML = '<p class="text-center text-danger py-3"><i class="fa-solid fa-triangle-exclamation me-1"></i>讀取留言失敗。請確認網路連線與 GAS 部署權限。</p>';
         }
     }
 
     // 2. 發送留言到 Google Sheet
     document.getElementById('msg-form').addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // 🛡️ 防護 1：檢查蜜罐陷阱 (Honeypot)
+        const honeypot = document.getElementById('hp-field').value;
+        if (honeypot !== "") {
+            // 自動化機器人會觸發這裡，直接假裝成功但不動作
+            alert('留言成功發送！');
+            document.getElementById('input-msg').value = '';
+            return;
+        }
+
+        // 🛡️ 防護 2：檢查冷卻時間（同一台電腦 30 秒內限制留言一次）
+        const lastPostTime = localStorage.getItem('last_post_time');
+        const now = new Date().getTime();
+        if (lastPostTime && (now - lastPostTime < 30000)) {
+            const waitSec = Math.ceil((30000 - (now - lastPostTime)) / 1000);
+            alert(`留言太頻繁囉！請等待 ${waitSec} 秒後再試。`);
+            return;
+        }
+
         const submitBtn = document.getElementById('submit-btn');
         const name = document.getElementById('input-name').value;
         const message = document.getElementById('input-msg').value;
@@ -135,20 +165,20 @@
         formData.append('message', message);
 
         try {
-            // 使用 no-cors 模式防止 Google Apps Script 302 重導向觸發瀏覽器阻擋
             await fetch(GAS_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData
             });
             
+            // 紀錄發送時間點
+            localStorage.setItem('last_post_time', new Date().getTime());
+
             document.getElementById('input-msg').value = '';
             alert('留言成功發送！');
             
-            // 延遲 1.5 秒等 Google 試算表寫入完成後刷新列表
+            // 延遲 1.5 秒等 Google Sheet 寫入完成後刷新列表
             setTimeout(loadMessages, 1500);
 
         } catch (err) {
@@ -169,7 +199,7 @@
             .replace(/'/g, "&#039;");
     }
 
-    // 頁面開啟時自動執行一次載入
+    // 頁面初次載入
     loadMessages();
 </script>
 

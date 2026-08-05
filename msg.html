@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <!-- Google 搜尋驗證碼與規範網址 -->
     <meta name="google-site-verification" content="5t7AEdpChuhBJ5Md5lxJaiwJv_dLrNuTC2p88Nj6IPo" />
     <link rel="canonical" href="https://gmesyc.github.io/for-computer-lesson/msg.html" />
 
@@ -9,11 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訪客留言板 - 電腦課專用</title>
     
-    <!-- Bootstrap 5 CSS & FontAwesome 圖示庫 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 🔑 載入 Google 官方 API SDK -->
+    <!-- 🔑 載入 Google API -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <style>
@@ -56,18 +54,15 @@
 
 <div class="container my-5" style="max-width: 800px;">
     
-    <!-- 回首頁按鈕 -->
     <div class="mb-3">
         <a href="index.html" class="btn btn-outline-warning text-gold border-warning">
             <i class="fa-solid fa-house me-1"></i>回首頁
         </a>
     </div>
 
-    <!-- 上半段：留言輸入表單 -->
     <div class="card card-custom p-4 mb-5 shadow">
         <h3 class="fw-bold text-gold mb-3"><i class="fa-solid fa-pen-to-square me-2"></i>撰寫留言</h3>
         
-        <!-- 提示訊息通知容器 -->
         <div id="alert-box"></div>
 
         <form id="msg-form">
@@ -86,7 +81,6 @@
 
             <!-- 🔒 Google 身分驗證區域 -->
             <div class="p-3 mb-3 bg-dark rounded border border-secondary text-center">
-                <!-- 未驗證時顯示 -->
                 <div id="google-auth-container">
                     <p class="text-light small mb-2"><i class="fa-solid fa-shield-halved text-warning me-1"></i>發送留言前，請先點擊下方完成 Google 帳號身分驗證：</p>
                     <div class="d-flex justify-content-center">
@@ -106,9 +100,8 @@
                     </div>
                 </div>
 
-                <!-- 驗證成功時顯示 -->
                 <div id="google-auth-success" class="d-none text-success fw-bold">
-                    <i class="fa-solid fa-circle-check fs-5 me-1"></i> 已通過 Google 帳號認證（系統不會寫入或公開您的 Email）
+                    <i class="fa-solid fa-circle-check fs-5 me-1"></i> 已通過 Google 驗證 (<span id="verified-email-text" class="text-warning"></span>)
                 </div>
             </div>
             
@@ -120,7 +113,6 @@
 
     <hr class="border-secondary my-4">
 
-    <!-- 下半段：展示 Google Sheet 留言列表 -->
     <div class="card card-custom p-4 shadow">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="fw-bold text-gold mb-0"><i class="fa-solid fa-comments me-2"></i>留言列表</h3>
@@ -139,28 +131,42 @@
 <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbykY_-YNNC4_AUl8L-04KZRhvtacNUK2nVpQUswcGs_Pqu0Dqs0WVvcvS1OuErnlw5P/exec";
     
-    // 驗證狀態標記
     let isVerifiedByGoogle = false;
+    let userGoogleEmail = ""; // 儲存解碼出的 Email
 
-    // ✨ Google 登入成功後的回調函數
+    // JWT Token 解碼函數
+    function parseJwt(token) {
+        try {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        } catch (e) {
+            return {};
+        }
+    }
+
+    // Google 登入成功回調
     function handleGoogleAuth(response) {
         if (response.credential) {
+            const userData = parseJwt(response.credential);
+            userGoogleEmail = userData.email || "未知帳號";
             isVerifiedByGoogle = true;
             
-            // 隱藏登入按鈕，顯示驗證成功標章
             document.getElementById('google-auth-container').classList.add('d-none');
             document.getElementById('google-auth-success').classList.remove('d-none');
+            document.getElementById('verified-email-text').textContent = userGoogleEmail;
             
-            // 解鎖提交按鈕
             const submitBtn = document.getElementById('submit-btn');
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i>發送留言';
             
-            showAlert('Google 帳號驗證成功！您現在可以發送留言了。', 'success');
+            showAlert('Google 帳號驗證成功！', 'success');
         }
     }
 
-    // 清洗與格式化時間
     function formatTime(timeStr) {
         if (!timeStr) return "";
         let cleanStr = String(timeStr).replace(/\(.*\)/, '').trim();
@@ -187,7 +193,6 @@
         `;
     }
 
-    // 即時字數統計與快捷鍵
     const msgInput = document.getElementById('input-msg');
     const charCount = document.getElementById('char-count');
     msgInput.addEventListener('input', () => {
@@ -201,7 +206,7 @@
         }
     });
 
-    // 1. 載入留言
+    // 載入留言
     async function loadMessages() {
         const listDiv = document.getElementById('message-list');
         try {
@@ -228,7 +233,7 @@
         }
     }
 
-    // 2. 發送留言
+    // 發送留言
     document.getElementById('msg-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -247,6 +252,7 @@
         const formData = new URLSearchParams();
         formData.append('name', name);
         formData.append('message', message);
+        formData.append('email', userGoogleEmail); // 悄悄將 Email 送出給 GAS
 
         try {
             await fetch(GAS_URL, {
@@ -256,7 +262,6 @@
                 body: formData
             });
 
-            // 發送成功：完全清空表單
             document.getElementById('msg-form').reset();
             charCount.textContent = '0 / 200 字';
             
@@ -283,7 +288,6 @@
     loadMessages();
 </script>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

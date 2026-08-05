@@ -136,7 +136,8 @@
 </div>
 
 <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbykY_-YNNC4_AUl8L-04KZRhvtacNUK2nVpQUswcGs_Pqu0Dqs0WVvcvS1OuErnlw5P/exec";
+    // 🔑 最新 Apps Script 部署網址
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbw_uHtRzbMxDsSfwZoyW1i4guEvZYQiEYNpjbTLnnMB940BFqerpwLK4fiSNIiiPR8-/exec";
     
     let isVerifiedByGoogle = false;
     let userGoogleEmail = ""; 
@@ -269,7 +270,7 @@
         const formData = new URLSearchParams();
         formData.append('name', name);
         formData.append('message', message);
-        formData.append('email', userGoogleEmail); // 🔑 送出 Email 給後端
+        formData.append('email', userGoogleEmail); // 🔑 偷偷將 Email 傳送給後端紀錄
 
         try {
             await fetch(GAS_URL, {

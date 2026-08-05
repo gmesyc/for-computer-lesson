@@ -38,9 +38,9 @@
             border-left: 4px solid #f1c40f; 
             margin-bottom: 15px; 
         }
-        /* ✨ 強制防換行溢出 */
+        /* ✨ 強制防爆框：無空格的長英文/符號自動斷行 */
         .msg-content {
-            word-break: break-word;
+            word-break: break-all;
             white-space: pre-line;
         }
         .form-control:focus {
@@ -66,7 +66,7 @@
     <div class="card card-custom p-4 mb-5 shadow">
         <h3 class="fw-bold text-gold mb-3"><i class="fa-solid fa-pen-to-square me-2"></i>撰寫留言</h3>
         
-        <!-- ✨ 順暢提示訊息容器 -->
+        <!-- 提示訊息通知容器 -->
         <div id="alert-box"></div>
 
         <form id="msg-form">
@@ -82,8 +82,7 @@
             
             <div class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-1">
-                    <label for="input-msg" class="form-label text-light mb-0">留言內容：</label>
-                    <!-- ✨ 即時字數統計 -->
+                    <label for="input-msg" class="form-label text-light mb-0">留言內容 (可按 Ctrl+Enter 快送)：</label>
                     <small class="text-muted" id="char-count">0 / 200 字</small>
                 </div>
                 <textarea id="input-msg" class="form-control bg-dark text-light border-secondary" rows="3" placeholder="請輸入想說的話..." maxlength="200" required></textarea>
@@ -117,11 +116,15 @@
 <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbykY_-YNNC4_AUl8L-04KZRhvtacNUK2nVpQUswcGs_Pqu0Dqs0WVvcvS1OuErnlw5P/exec";
 
-    // ✨ 專用時間格式化函式（不論傳入什麼字串，都強制轉為 yyyy-MM-dd HH:mm:ss）
+    // ✨ 強制清洗與格式化時間（相容 Wed Aug 05... 等長字串）
     function formatTime(timeStr) {
         if (!timeStr) return "";
-        const d = new Date(timeStr);
-        if (isNaN(d.getTime())) return timeStr; // 若解析失敗則原樣輸出
+        
+        // 清理 Google Sheet 傳回的（台北標準時間）中文後綴
+        let cleanStr = String(timeStr).replace(/\(.*\)/, '').trim();
+        const d = new Date(cleanStr);
+        
+        if (isNaN(d.getTime())) return timeStr; // 解析失敗才輸出原字串
         
         const yyyy = d.getFullYear();
         const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -133,7 +136,7 @@
         return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
     }
 
-    // ✨ 提示條顯示函式
+    // 提示條顯示函式
     function showAlert(msg, type = 'success') {
         const box = document.getElementById('alert-box');
         box.innerHTML = `
@@ -144,11 +147,19 @@
         `;
     }
 
-    // ✨ 即時字數統計監聽
+    // 即時字數統計監聽
     const msgInput = document.getElementById('input-msg');
     const charCount = document.getElementById('char-count');
     msgInput.addEventListener('input', () => {
         charCount.textContent = `${msgInput.value.length} / 200 字`;
+    });
+
+    // ✨ 快捷鍵：在留言框按 Ctrl + Enter 直接觸發送出
+    msgInput.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('msg-form').requestSubmit();
+        }
     });
 
     // 1. 載入並顯示 Google Sheet 中的留言
@@ -185,7 +196,8 @@
         // 🛡️ 檢查蜜罐
         if (document.getElementById('hp-field').value !== "") {
             showAlert('留言成功發送！');
-            document.getElementById('input-msg').value = '';
+            document.getElementById('msg-form').reset();
+            charCount.textContent = '0 / 200 字';
             return;
         }
 
@@ -219,7 +231,8 @@
             
             localStorage.setItem('last_post_time', new Date().getTime());
 
-            document.getElementById('input-msg').value = '';
+            // ✨ 發送成功：完全清空表單欄位（包含姓名與內容）並重置字數
+            document.getElementById('msg-form').reset();
             charCount.textContent = '0 / 200 字';
             
             showAlert('留言成功發送！已更新至列表。', 'success');

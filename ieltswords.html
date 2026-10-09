@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="IELTS 雅思主題高頻字彙練習：看英文答中文，支援選擇題與輸入題、錯題本。">
+<title>IELTS 主題字彙練習</title>
+<style>
+:root{
+  --bg:#f5f5f2;--card:#ffffff;--text:#1f2328;--muted:#6a6f76;--line:#e4e4df;
+  --brand:#0f766e;--brand-ink:#ffffff;--brand-soft:#e3f3f1;
+  --ok:#15803d;--ok-soft:#e7f6ec;--bad:#c2321f;--bad-soft:#fcebe8;--warn:#a15c07;--warn-soft:#fff3e0;
+  --radius:14px;--shadow:0 1px 2px rgba(20,20,20,.05),0 4px 16px rgba(20,20,20,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#111413;--card:#1a1f1e;--text:#e8ebea;--muted:#9aa3a1;--line:#2b3331;
+    --brand:#2dd4bf;--brand-ink:#04211d;--brand-soft:#123430;
+    --ok:#4ade80;--ok-soft:#12301d;--bad:#ff7a66;--bad-soft:#3a1814;--warn:#f5a524;--warn-soft:#352612;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.55;
+  font-family:system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+body.modal-open{overflow:hidden}
+[hidden]{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+header.app{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo{width:44px;height:44px;flex:none;border-radius:12px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:800;font-size:1.2rem}
+h1{font-size:1.3rem;margin:0;line-height:1.3}
+.tag{color:var(--muted);font-size:.88rem;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.card h2{font-size:1.05rem;margin:0;display:flex;align-items:center;gap:8px}
+.step{width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:inline-grid;place-items:center;font-size:.8rem;font-weight:700}
+.sub{color:var(--muted);font-size:.9rem;margin:6px 0 12px}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:var(--line);color:var(--muted);font-weight:600;white-space:nowrap}
+.pill-ok{background:var(--ok-soft);color:var(--ok)}
+.pill-brand{background:var(--brand-soft);color:var(--brand)}
+.pill-bad{background:var(--bad-soft);color:var(--bad)}
+
+/* themes */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.theme{appearance:none;-webkit-appearance:none;font:inherit;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:9px 10px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:9px;align-items:center;text-align:left;transition:background .15s,border-color .15s,opacity .15s;touch-action:manipulation}
+.theme .L{grid-row:1/3;width:30px;height:30px;border-radius:8px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:800}
+.theme .nm{font-weight:700;font-size:.95rem;line-height:1.25}
+.theme .nm,.theme .n{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.theme .n{font-size:.75rem;color:var(--muted)}
+.theme:hover:not(:disabled){border-color:var(--brand)}
+.theme.on{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.theme.on .L{background:rgba(255,255,255,.22);color:inherit}
+.theme.on .n{color:inherit;opacity:.85}
+.theme:disabled{opacity:.35;cursor:not-allowed}
+.row-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* buttons */
+.btn{appearance:none;-webkit-appearance:none;font:inherit;font-weight:600;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:10px 16px;cursor:pointer;transition:border-color .15s,color .15s,filter .15s,background .15s;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center;touch-action:manipulation}
+.btn:hover:not(:disabled){border-color:var(--brand);color:var(--brand)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.primary:hover:not(:disabled){filter:brightness(1.08);color:var(--brand-ink)}
+.btn.ghost{background:transparent}
+.btn.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.btn.danger:hover:not(:disabled){background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+.btn.good{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.good:hover:not(:disabled){filter:brightness(1.08);color:#fff}
+.btn.sm{padding:6px 12px;font-size:.88rem}
+.btn.block{width:100%}
+.btn.big{padding:14px 18px;font-size:1.05rem}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:focus-visible,.theme:focus-visible,.seg-btn:focus-visible,.opt:focus-visible,.icon-btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.75em;padding:1px 5px;border-radius:5px;border:1px solid currentColor;opacity:.7;margin-left:4px}
+
+/* segmented */
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.seg-btn{appearance:none;-webkit-appearance:none;font:inherit;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;font-weight:700;text-align:left;transition:background .15s,border-color .15s;touch-action:manipulation}
+.seg-btn small{font-weight:400;font-size:.8rem;color:var(--muted)}
+.seg-btn:hover{border-color:var(--brand)}
+.seg-btn.on{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.seg-btn.on small{color:inherit;opacity:.85}
+
+/* count */
+.count-row{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.count-input{width:96px;font:inherit;font-size:1.5rem;font-weight:800;text-align:center;padding:6px 8px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--text);outline:none}
+.count-input:focus{border-color:var(--brand)}
+.count-input.invalid{border-color:var(--bad);background:var(--bad-soft)}
+.step-btn{width:44px;height:44px;padding:0;font-size:1.35rem;line-height:1}
+.count-hint{color:var(--muted);font-size:.88rem}
+.status{font-size:.85rem;margin:10px 0 0;padding:8px 10px;border-radius:8px}
+.status.warn{background:var(--warn-soft);color:var(--warn)}
+.note{font-size:.88rem;color:var(--muted)}
+.note ul{margin:6px 0 0;padding-left:1.2em}
+.note li{margin:3px 0}
+
+/* quiz */
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:14px}
+#progressBar{height:100%;width:0;background:var(--brand);transition:width .3s}
+.q-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.q-num{font-size:1rem;color:var(--muted)}
+.q-num b{color:var(--text);font-size:1.45rem}
+.q-theme{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.85rem;flex-wrap:wrap;justify-content:flex-end}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:7px;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:.8rem;white-space:nowrap}
+.word-box{text-align:center;margin:26px 0 22px}
+.q-word{font-size:2.3rem;font-weight:800;line-height:1.2;word-break:break-word;letter-spacing:.01em}
+.q-pos{display:inline-block;margin-top:8px;font-size:.95rem;color:var(--muted);font-style:italic;font-family:Georgia,"Times New Roman",serif}
+.answer-input{width:100%;font:inherit;font-size:1.4rem;text-align:center;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--text);outline:none}
+.answer-input:focus{border-color:var(--brand)}
+.answer-input.ok{border-color:var(--ok);background:var(--ok-soft)}
+.answer-input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.answer-input.ask{border-color:var(--warn);background:var(--warn-soft)}
+.answer-input:disabled{opacity:1;-webkit-text-fill-color:var(--text);color:var(--text)}
+.shake{animation:shake .35s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.input-msg{min-height:1.3em;font-size:.85rem;color:var(--bad);margin:6px 0 0;text-align:center}
+.answer-actions{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:6px}
+.opts{display:grid;gap:10px}
+.opt{appearance:none;-webkit-appearance:none;font:inherit;text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:12px 14px;cursor:pointer;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;min-height:54px;transition:border-color .15s,background .15s;touch-action:manipulation}
+.opt .k{width:28px;height:28px;border-radius:8px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:800;font-size:.9rem}
+.opt .t{font-size:1rem;word-break:break-word}
+.opt .r{font-weight:800}
+.opt:hover:not(:disabled){border-color:var(--brand)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+.opt.correct .r{color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .r{color:var(--bad)}
+.opt.dim{opacity:.55}
+.mc-actions{margin-top:10px;display:flex;justify-content:center}
+.feedback{border-radius:12px;padding:14px 16px;margin:12px 0}
+.feedback.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+.feedback.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.feedback.ask{background:var(--warn-soft);border:1px solid var(--warn)}
+.fb-title{font-weight:800;font-size:1.1rem}
+.feedback.ok .fb-title{color:var(--ok)}
+.feedback.bad .fb-title{color:var(--bad)}
+.feedback.ask .fb-title{color:var(--warn)}
+.fb-line{font-size:.95rem;margin-top:6px;word-break:break-word;display:grid;grid-template-columns:5.4em 1fr;gap:6px}
+.fb-label{color:var(--muted)}
+.fb-mean{font-weight:700;font-size:1.05rem}
+.fb-note{font-size:.85rem;margin-top:8px;color:var(--muted)}
+.judge{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.kbd-tip{text-align:center;font-size:.78rem;color:var(--muted);margin:10px 0 0}
+
+/* results */
+.result-card{text-align:center}
+.ring{--p:0;--rc:var(--brand);width:160px;height:160px;border-radius:50%;margin:6px auto 12px;display:grid;place-items:center;
+  background:conic-gradient(var(--rc) calc(var(--p) * 1%),var(--line) 0)}
+.ring-inner{width:128px;height:128px;border-radius:50%;background:var(--card);display:grid;place-content:center;text-align:center}
+.pct{font-size:2.1rem;font-weight:800;line-height:1.1}
+.frac{color:var(--muted);font-size:.9rem}
+.result-card h2{justify-content:center;font-size:1.2rem}
+.result-actions{display:grid;gap:8px;margin-top:16px}
+@media (min-width:560px){.result-actions{grid-template-columns:repeat(3,1fr)}}
+.result-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.r-row{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
+.r-row.ok{border-left:4px solid var(--ok)}
+.r-row.bad{border-left:4px solid var(--bad)}
+.r-row.nb{grid-template-columns:1fr auto;border-left:4px solid var(--warn)}
+.r-no{color:var(--muted);font-size:.85rem;text-align:center}
+.r-word{font-weight:700;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.r-word i{font-weight:400;color:var(--muted);font-size:.85rem;font-family:Georgia,"Times New Roman",serif}
+.r-mean{font-size:.88rem}
+.r-ans{font-size:.82rem;color:var(--muted);word-break:break-word}
+.r-mark{font-weight:800;font-size:1.05rem;text-align:center;white-space:nowrap}
+.r-mark small{display:block;font-size:.68rem;font-weight:600}
+.r-row.ok .r-mark{color:var(--ok)}
+.r-row.bad .r-mark{color:var(--bad)}
+.icon-btn{border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;display:grid;place-items:center;font:inherit;font-weight:700;background:var(--bad-soft);color:var(--bad);touch-action:manipulation}
+
+/* modal */
+.modal{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(10,14,14,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.modal-box{background:var(--card);color:var(--text);border-radius:16px;padding:20px;width:100%;max-width:440px;max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.modal-box h3{margin:0 0 8px;font-size:1.15rem}
+.modal-box p{margin:6px 0;color:var(--muted);font-size:.92rem}
+.modal-actions{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;font-size:.9rem;z-index:30;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:24px}
+@media (hover:none){ kbd,.kbd-tip{display:none} }
+@media (max-width:420px){
+  .card{padding:15px}
+  .q-word{font-size:2rem}
+  .theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .r-row{gap:8px;padding:9px 10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <div class="logo">字</div>
+    <div>
+      <h1>IELTS 主題字彙練習</h1>
+      <p class="tag">看英文、答中文，按主題練熟雅思高頻字彙</p>
+    </div>
+  </header>
+
+  <!-- ============ SETUP ============ -->
+  <section id="setup">
+    <div class="card">
+      <div class="card-head">
+        <h2>📒 錯題本</h2>
+        <span id="nbCount" class="pill">0 字</span>
+      </div>
+      <p class="sub" id="nbDesc"></p>
+      <div class="row-actions">
+        <button type="button" class="btn primary sm" id="btnNbPractice">練習錯題本</button>
+        <button type="button" class="btn sm" id="btnNbToggle">查看清單</button>
+        <button type="button" class="btn ghost sm" id="btnNbCopy">📋 複製清單</button>
+        <button type="button" class="btn danger sm" id="btnNbClear">清空錯題本</button>
+      </div>
+      <div id="nbList" class="result-list" hidden></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2><span class="step">1</span>選擇主題</h2>
+        <span id="themeCounter" class="pill">已選 0 / 5</span>
+      </div>
+      <p class="sub">請選擇 <b>1 ~ 5</b> 個主題，題目會從這些主題中隨機抽出。</p>
+      <div id="themeGrid" class="theme-grid"></div>
+      <div class="row-actions">
+        <button type="button" class="btn ghost sm" id="btnRand1">🎲 隨機 1 個</button>
+        <button type="button" class="btn ghost sm" id="btnRand3">🎲 隨機 3 個</button>
+        <button type="button" class="btn ghost sm" id="btnRand5">🎲 隨機 5 個</button>
+        <button type="button" class="btn ghost sm" id="btnClear">清除選擇</button>
+      </div>
+      <p id="poolInfo" class="sub" style="margin:12px 0 0"></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2><span class="step">2</span>本次題數</h2></div>
+      <div class="count-row">
+        <button type="button" class="btn step-btn" id="countMinus" aria-label="減少題數">−</button>
+        <input type="text" id="countInput" class="count-input" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="15" autocomplete="off" aria-label="題數（10 到 20）">
+        <button type="button" class="btn step-btn" id="countPlus" aria-label="增加題數">＋</button>
+        <span class="count-hint">題（請輸入 10 ~ 20）</span>
+      </div>
+      <p id="countErr" class="input-msg" style="text-align:left"></p>
+      <p id="countWarn" class="status warn" hidden></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2><span class="step">3</span>作答方式</h2></div>
+      <div id="modeSeg" class="seg" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2><span class="step">4</span>顯示詞性</h2></div>
+      <div id="posSeg" class="seg" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card note">
+      <b style="color:var(--text)">作答規則</b>
+      <ul>
+        <li><b>選擇題</b>：從 4 個中文意思中選出正確的一個，可按鍵盤 <code>1</code>~<code>4</code> 作答。</li>
+        <li><b>輸入中文</b>：意思相近即可。系統會先自動比對；比對不到時會並排顯示「你的答案」與「標準意思」，由你自己判斷「意思相近，算對」或「答錯了」。</li>
+        <li>一個字有多個意思時，答出其中任何一個就算對。</li>
+        <li>同一個字出現在多個主題時，中文意思已合併成一份。</li>
+      </ul>
+    </div>
+
+    <button type="button" class="btn primary block big" id="btnStart" disabled>請先選擇 1 ~ 5 個主題</button>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" hidden>
+    <div class="quiz-top">
+      <button type="button" class="btn ghost sm" id="btnQuit">✕ 結束測驗</button>
+      <span id="qMode" class="pill pill-brand"></span>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div class="card">
+      <div class="q-head">
+        <div class="q-num">第 <b id="qNum">1</b> / <span id="qTotal">10</span> 題</div>
+        <div class="q-theme" id="qTheme"></div>
+      </div>
+      <div class="word-box">
+        <div id="qWord" class="q-word" lang="en"></div>
+        <div id="qPos" class="q-pos" hidden></div>
+      </div>
+
+      <!-- multiple choice -->
+      <div id="mcBox" hidden>
+        <div id="opts" class="opts"></div>
+        <div class="mc-actions" id="mcActions">
+          <button type="button" class="btn ghost sm" id="btnMcSkip">不知道</button>
+        </div>
+      </div>
+
+      <!-- typed -->
+      <div id="typeBox" hidden>
+        <form id="answerForm" autocomplete="off" novalidate>
+          <input id="answerInput" class="answer-input" type="text" lang="zh-Hant" placeholder="輸入中文意思"
+                 autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" aria-label="答案">
+        </form>
+        <p id="inputMsg" class="input-msg"></p>
+        <div class="answer-actions" id="answerActions">
+          <button type="button" class="btn" id="btnSkip">不知道</button>
+          <button type="button" class="btn primary" id="btnSubmit">回答</button>
+        </div>
+      </div>
+
+      <div id="feedback" class="feedback" hidden></div>
+      <div id="judgeBox" class="judge" hidden>
+        <button type="button" class="btn good" id="btnJudgeOk">✔ 意思相近，算對<kbd>1</kbd></button>
+        <button type="button" class="btn danger" id="btnJudgeBad">✘ 答錯了<kbd>2</kbd></button>
+      </div>
+      <button type="button" id="btnNext" class="btn primary block big" hidden>下一題 →</button>
+      <p class="kbd-tip" id="kbdTip"></p>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" hidden>
+    <div class="card result-card">
+      <div class="ring" id="scoreRing">
+        <div class="ring-inner">
+          <div id="scorePct" class="pct">0%</div>
+          <div id="scoreFrac" class="frac">0 / 0</div>
+        </div>
+      </div>
+      <h2 id="resultTitle"></h2>
+      <p id="resultMeta" class="sub"></p>
+      <p id="resultNb" class="sub" style="margin-top:-6px"></p>
+      <div class="result-actions">
+        <button type="button" class="btn primary" id="btnRetryWrong">針對錯題再練習</button>
+        <button type="button" class="btn" id="btnAgain">重新出題（相同設定）</button>
+        <button type="button" class="btn ghost" id="btnHome">回到設定</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <h2>作答明細</h2>
+        <button type="button" class="btn ghost sm" id="btnCopyWrong">📋 複製本次錯字</button>
+      </div>
+      <div id="resultList" class="result-list"></div>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+    <div id="modalActions" class="modal-actions"></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/*LOGIC-START*/
+// 題庫：themes = [代號, 英文名稱, 中文名稱]；words = [英文, 詞性, 所屬主題代號, 中文意思（；分隔）, 補充]
+const DATA = {"themes":[["A","Agriculture","農業"],["B","Anthropology","人類學"],["C","Architecture","建築"],["D","Art","藝術"],["E","Astronomy","天文學"],["F","Botany","植物學"],["G","Economics","經濟"],["H","Chemistry","化學"],["I","Education","教育"],["J","Environment","環境"],["K","Photography","攝影"],["L","Geology","地質學"],["M","Geography","地理學"],["N","Human & Health","人體與健康"],["O","Literature","文學"],["P","Meteorology","氣象學"],["Q","Music","音樂"],["R","Psychology and Linguistics","心理學／語言學"],["S","Crime & Sociology","社會學／犯罪"],["T","Technology","科技"],["U","Evolution","演化"]],"words":[["ash","n.","A","灰；灰燼",""],["acre","n.","A","英畝",""],["agriculture","n.","AB","農業",""],["animals","n.","A","動物",""],["basin","n.","AM","盆地",""],["berries","n.","A","莓果",""],["camel","n.","A","駱駝",""],["canal","n.","ACM","運河；水道；河渠",""],["cattle","n.","A","家畜；牲口",""],["cereal","n.","A","穀物（如米、麥、燕麥等）",""],["deforestation","n.","AJ","砍伐森林；毀林",""],["climate","n.","ABJP","氣候",""],["crops","n.","A","農作物；莊稼",""],["cultivation","n.","A","種植",""],["domesticate","v.","A","馴養",""],["empire","n.","A","帝國",""],["fertilizer","n.","AF","肥料；化肥",""],["fish","n.","A","魚類",""],["flock","n.","AU","一群；（鳥，羊等）群",""],["flood","n./v.","ABP","淹沒；使泛濫；氾濫；洪水；水災",""],["food","n.","A","糧食",""],["gene","n.","AN","基因",""],["genetically diverse","","A","遺傳多樣性",""],["genetically modified crops","","A","基因改造農作物",""],["grain","n.","A","穀實穀類植物；穀粒",""],["harvest","v./n.","A","收割；收穫",""],["harvester","n.","A","收穫者；收割者；收割機",""],["hay","n.","A","（做飼料用的）乾草",""],["herd","n.","A","一群（較大的獸類）；獸群",""],["hunter","n.","A","獵人",""],["hunting and foraging","","A","狩獵和覓食",""],["irrigation","n.","A","灌溉",""],["labor","n.","A","勞力",""],["laborer","n.","A","勞工",""],["large population","n. phr.","A","人口眾多",""],["manual","adj./n.","AT","手的；手工的；用手操作的；(n.) 使用手冊；指南",""],["mineral","n.","ALN","礦物",""],["natural resource","n.","A","天然資源",""],["natural selection","n.","A","自然選擇；天擇",""],["nitrogen","n.","AH","氮",""],["nutrient","n.","A","營養物；滋養物",""],["oat","n.","A","燕麥",""],["output","n.","A","產量",""],["ox","n.","A","牛",""],["pest","n.","AU","害蟲",""],["pesticide","n.","A","農藥",""],["potato","n.","A","馬鈴薯；洋芋",""],["produce","n.","A","農產品",""],["reap","v.","A","收割（莊稼）",""],["rice","n.","A","米",""],["river","n.","AM","河流；河",""],["sediment","n.","AL","沉積物；沉澱物",""],["seed","n.","A","種子",""],["settlement","n.","ABG","定居地；新殖民地；協議；支付",""],["sheep","n.","A","綿羊",""],["shepherd","n.","A","牧羊人",""],["shell","n.","A","硬殼",""],["silt","n.","A","泥沙；淤泥",""],["skin","n.","AN","果皮（如橘皮）；皮膚",""],["slavery","n.","A","奴役",""],["soil","n.","AFL","土壤",""],["soil erosion","n.","A","土壤流失",""],["soybean","n.","A","大豆",""],["spray","v.","A","噴灑",""],["surplus of food","n.","A","糧食過剩；剩餘糧食",""],["subsidy","n.","A","津貼；補貼；補助金",""],["territory","n.","AMU","領土",""],["tractor","n.","A","農用拖拉機","farm tractor"],["topsoil","n.","A","表土",""],["valley","n.","ABM","峽谷；流域；山谷；溪谷",""],["wars","n.","A","戰爭",""],["wheat","n.","AB","小麥",""],["yam","n.","A","山藥；蕃薯",""],["agricultural","adj.","B","農業的",""],["ancestor","n.","B","祖先",""],["anthropology","n.","B","人類學",""],["antique","n.","B","古物；古董",""],["antiquity","n.","B","古代；古老",""],["archeologist","n.","B","考古學家",""],["archeology","n.","B","考古學",""],["army","n.","B","軍隊",""],["artifact","n.","B","手工藝品",""],["authority","n.","B","權力；當權者",""],["barren","adj.","BFM","不孕的；貧瘠的",""],["Bronze Age","n.","B","銅器時代",""],["canoe","n.","B","獨木舟",""],["clay","n.","BCD","黏土；陶土",""],["colonial","adj.","B","殖民地的","名詞：colony"],["commerce","n.","BG","商務；貿易",""],["commodity","n.","BG","商品；農產品",""],["conquer","v.","B","征服",""],["continent","n.","BLM","大陸；大洲",""],["countryside","n.","B","鄉間；農村",""],["craft","n.","B","工藝；手藝；技術",""],["craftsman","n.","B","工匠",""],["crop","n.","B","農作物",""],["cultural","adj.","B","文化的",""],["deplete","v.","B","消耗",""],["defend","v.","B","保護；防衛",""],["defense","n.","B","防守；防禦",""],["descendant","n.","B","後裔；子孫；後代",""],["dispute","n./v.","BG","爭執；爭端；糾紛",""],["drought","n.","BP","乾旱；旱災",""],["excavate","v.","B","挖掘",""],["exchange","v.","B","交流",""],["farmer","n.","B","農夫",""],["fertile","adj.","B","肥沃",""],["forage","v.","B","四處搜尋（食物等）；覓食",""],["forefather","n.","B","祖先",""],["fossil","n.","BL","化石",""],["found","v.","B","創建；設立",""],["foundation","n.","BC","地基；基礎；地腳",""],["game","n.","B","獵物 （可指獸, 鳥, 魚等）",""],["gathering","n.","B","集合",""],["glacier","n.","BL","冰川；冰河",""],["glacial","adj.","B","冰河的",""],["good","n.","B","產品；商品",""],["grave","n.","B","墓",""],["hieroglyph","n.","B","象形文字（古埃及等的象形繪畫文字）",""],["hierarchy","n.","BR","（人或事物的）階級組織；層次；等級體系",""],["homogeneous","adj.","B","同一種族/類的",""],["human kind/race","n.","B","人類",""],["humanity","n.","B","人類",""],["Ice Age","n.","B","冰河時代",""],["infertile","adj.","B","不育；（土地）貧瘠的",""],["language","n.","B","語言",""],["legend","n.","B","傳奇；傳說",""],["linguistics","n.","B","語言學",""],["mankind","n.","B","人類",""],["merchandise","n.","B","商品",""],["merchant","n.","B","商人",""],["migrate","v.","BU","遷移",""],["migration","n.","BS","遷移；移民",""],["myth","n.","B","神話",""],["natural disaster","n. phr.","B","天然災害",""],["Neolithic","adj.","B","新石器時代的",""],["offspring","n.","BU","後人；幼獸；幼苗",""],["origin","n.","B","起源",""],["originate","v.","B","起源於",""],["possession","n.","B","所有物",""],["predecessor","n.","B","前任",""],["prehistoric","adj.","B","史前",""],["prey","n./v.","BU","獵物；(v.) 捕食；獵食",""],["product","n.","B","產品",""],["pyramid","n.","B","金字塔",""],["raft","n.","B","筏",""],["rebel","v./n.","B","反叛；反叛政府",""],["religion","n.","B","宗教",""],["remains","n.","B","遺跡；遺骸",""],["route","n.","B","路線；經過之路",""],["ruins","n.","B","遺跡；廢墟",""],["ruler","n.","B","領袖",""],["rural","adj.","BS","鄉村的；鄉下的；田園的",""],["script","n.","B","書寫體；稿",""],["slave","n.","B","奴隸",""],["social","adj./n.","B","社會的","名詞：society"],["staple","n.","B","主食",""],["Stone Age","n.","B","石器時代",""],["surround","v.","B","包圍",""],["surrender","v.","B","投降",""],["tablet","n.","BN","書板；藥片",""],["taboo","n.","BS","禁忌；禁忌的",""],["temple","n.","B","廟",""],["the Mediterranean Sea","n.","B","地中海",""],["tomb","n.","B","墓",""],["trade","v./n.","BG","貿易；交易；商業",""],["tribe","n.","BS","部落；部族",""],["troop","n.","B","部隊",""],["urban","adj.","BS","城市的；市內的",""],["well","n./adj.","BN","泉；源泉；井；(adj.) 健康的",""],["wild animal","n. phr.","B","野生動物",""],["acoustics","n.","C","音響效果；音質",""],["arch","n./v.","C","拱；拱門；(v.) 使成弓形；拱起",""],["architecture","n.","CD","建築學；建築術；架構；體系結構",""],["base","n.","C","基；底；基部",""],["brass","n.","C","黃銅；黃銅製品",""],["brick","n.","C","磚；磚塊",""],["bridge","n.","C","橋；橋樑",""],["bronze","n.","C","青銅；青銅製品",""],["carve","v.","CD","雕刻",""],["century","n.","CD","世紀",""],["classicism","n.","CD","古典主義",""],["classical","adj.","CQ","古典的（指古希臘、羅馬文學、藝術等）",""],["collapse","v./n.","CEL","倒塌；崩潰",""],["column","n.","C","圓柱",""],["comfort","n.","C","安逸；舒適",""],["concrete","n.","C","混凝土",""],["construction","n.","C","建築；建造",""],["copper","n.","CK","銅；銅製品",""],["decorate","v.","C","裝飾",""],["dome","n.","C","圓屋頂；圓蓋",""],["exterior","n./adj.","C","外在的；外表的；外部",""],["forum","n.","CT","古羅馬的廣場；公開討論的場所；論壇",""],["fountain","n.","C","泉；水之源頭；人造噴泉",""],["framework","n.","C","框架；支架",""],["function","n.","C","功能；作用",""],["geometric","adj.","C","幾何（學）的",""],["geometry","n.","C","幾何學",""],["hall","n.","C","廳堂；大會堂",""],["horizontal","adj.","C","水平的；橫的",""],["interior","n./adj.","C","在內的；內部的；室內",""],["marble","n.","CL","大理石",""],["paint","n./v.","C","油漆；塗料",""],["pave","v.","C","鋪砌；鋪（路）",""],["pigment","n.","CD","色素；顏料",""],["pipe","n.","C","管；導管；輸送管",""],["pottery","n.","CD","陶瓷製造（術）；陶藝",""],["proportion","n.","C","比例",""],["raised","adj.","C","浮雕的；凸起的；升高的",""],["rebuild","v.","C","重建；改建",""],["rectangular","adj.","C","矩形的；長方形的",""],["reflect","v.","CD","反映",""],["renovate","v.","C","修理；改善；恢復",""],["restoration","n.","C","修復；復原；整修；重建",""],["scaffold","n.","C","鷹架；建築架",""],["sculpture","n.","CD","雕刻品；雕塑",""],["shelter","n./v.","C","遮蓋物；躲避處；避難所；(v.) 遮蔽；庇護",""],["skyscraper","n.","C","摩天樓；超高層大樓",""],["steel","n.","C","鋼",""],["spectacular","adj.","C","壯觀的；蔚為奇觀的",""],["statue","n.","C","雕像；塑像",""],["storage","n.","C","貯藏庫；貨棧；倉庫",""],["structure","n.","C","結構；建築物",""],["tilt","v./n.","C","使傾斜；使翹起；(n.) 傾斜；傾側",""],["trace","n.","C","痕跡；遺跡",""],["vault","n.","C","拱頂；拱形天花板",""],["vertical","adj.","C","垂直的；豎的",""],["ventilation system","n.","C","通風系統",""],["wall","n.","C","牆；壁；圍牆",""],["wide","adj.","C","寬闊的",""],["withstand","v.","C","抗拒",""],["abstract","adj./n.","D","抽象的；抽象觀念",""],["aesthetics / esthetic","adj.","D","審美的",""],["amateur","n./adj.","D","業餘的",""],["canvas","n.","D","油畫布；油畫",""],["capture","v.","DK","留存；記錄；拍攝；捕獲",""],["catalog","n.","D","目錄",""],["ceramics","n.","D","陶瓷製品",""],["character","n.","DO","性格；特徵；（劇本或小說）人物；角色",""],["china","n.","D","瓷器；陶瓷器",""],["compliment","n./v.","D","稱讚",""],["elements","n.","D","元素",""],["endorse","v.","DG","贊同；代言；背書；支持",""],["figure","n.","D","畫像 / 形像 /人物",""],["frame","n.","D","框架；框子；架構",""],["impressionism","n.","D","印象派",""],["inconsistent","adj.","D","不一致的；不符",""],["lighting","n.","D","（繪畫等的）明暗；照明",""],["linen","n.","D","亞麻布",""],["mold","n./v.","D","模具；(v.) 塑造",""],["movement","n.","DK","動作",""],["oil painting","n.","D","油畫",""],["painting","n.","D","畫",""],["patron","n.","D","贊助者；資助者",""],["patronage","n.","D","資助；贊助",""],["pattern","n.","D","模式",""],["photography","n.","DK","照相術；攝影術；攝影",""],["porcelain","n.","D","瓷器",""],["portraits","n.","D","畫像",""],["profile","n.","D","簡介",""],["realism","n.","D","現實主義",""],["sketch","v.","D","素描",""],["utilitarianism","n.","D","實利主義",""],["wood panels","n.","D","木板",""],["axis","n.","E","軸；軸線",""],["asteroid","n.","E","小行星",""],["astrology","n.","E","占星術",""],["astronaut","n.","E","太空人；宇航員",""],["astronomer","n.","E","天文學家",""],["astronomy","n.","E","天文學",""],["belt","n.","E","腰帶；帶；帶狀物",""],["black hole","n.","E","黑洞",""],["celestial","adj.","E","天上的",""],["collide","v.","E","碰撞",""],["comet","n.","E","彗星",""],["cosmic","adj.","E","宇宙的",""],["cosmos","n.","E","宇宙","同義：universe"],["crater","n.","EL","彈坑；隕石坑；火山口",""],["debris","n.","E","垃圾；碎片",""],["dense","adj.","E","密集的；稠密的",""],["Earth","n.","E","地球",""],["Eris","n.","E","鬩神星",""],["explode","v.","E","爆炸",""],["frontier","n.","E","國境；邊境；尚待開發的領域",""],["galaxy","n.","E","銀河系",""],["gravity","n.","E","引力；地心吸力",""],["impact","v./n.","E","衝擊；撞擊",""],["infinite","adj.","E","無限的",""],["lens","n.","EKN","透鏡；鏡片；晶體",""],["lunar","adj.","E","月球的",""],["magnification","n.","E","放大",""],["milky way","n.","E","銀河系",""],["observatory","n.","E","天文臺",""],["orbit","n.","E","軌道",""],["physics","n.","ET","物理學",""],["planet","n.","E","行星",""],["propel","v.","E","推動；推進；驅動",""],["radiation","n.","EJ","輻射",""],["release energy","phr.","E","釋放能量",""],["revolve","v.","E","旋轉；繞轉",""],["ring","n.","E","圈；環；環形物",""],["satellite","n.","ET","衛星",""],["solar","adj.","ET","太陽的；日光的；源自太陽的；依太陽而運行的",""],["solar eclipse","n.","E","日蝕",""],["solar system","n.","E","太陽系",""],["stellar","adj.","E","恒星的",""],["the Sun","n.","E","太陽",""],["take off","v. phr.","E","起飛",""],["telescope","n.","E","望遠鏡",""],["universe","n.","E","宇宙",""],["vacuum","n.","E","真空",""],["Venus","n.","E","金星",""],["visible","adj.","E","可看見的",""],["algae","n.","FU","藻類",""],["allergic reaction","n.","F","過敏性反應",""],["aquatic plant","n.","F","水生植物",""],["bark","n.","F","樹皮",""],["botanical","adj.","F","植物的","同義：botanic"],["botanist","n.","F","植物學家",""],["botany","n.","F","植物學",""],["branch","n.","F","樹枝",""],["bud","n.","F","花蕾",""],["calorie","n.","FN","卡路里（熱量單位）",""],["canopy","n.","F","樹冠層；頂棚",""],["carbohydrate","n.","F","碳水化合物；糖類（澱粉）","同義：starch"],["cell","n.","FN","細胞",""],["cluster","n.","F","一簇",""],["dehydration","n.","F","脫水",""],["everlasting","adj.","F","永久的",""],["evergreen","adj./n.","F","常綠；常綠植物",""],["fat","n.","F","脂肪",""],["flower","n.","F","花",""],["flowering","n./adj.","F","有花的；開花的",""],["foliage","","F","葉","同義：leaf"],["herb","n.","F","草",""],["immunity","n.","F","免疫",""],["jungle","n.","FM","叢林",""],["lawn","n.","F","草坪",""],["leafstalk","n.","F","葉柄",""],["lifespan","n.","F","壽命",""],["meadow","n.","F","草地；牧場",""],["moss","n.","F","苔",""],["nutrients","n.","F","營養物；滋養物",""],["nutrition","n.","FN","營養",""],["orchid","n.","F","蘭花",""],["organ","n.","F","器官",""],["organism","n.","FU","生物；有機物；生物體",""],["parasitic plant","n.","F","寄生植物",""],["peel","n.","F","果皮","同義：skin"],["pine","n.","F","松樹",""],["petal","n.","F","花瓣",""],["photosynthesis","n.","F","光合作用",""],["pollen","n.","F","花粉",""],["pollination","n./v.","F","授粉","動詞：pollinate"],["protein","n.","FN","蛋白質",""],["root","n.","F","根",""],["seeds","n.","F","種子",""],["sprout","n.","F","嫩芽；抽枝",""],["shrub","n.","F","灌木","bush"],["starch","n.","F","澱粉",""],["stem/stalk","n.","F","莖",""],["symbiosis","n.","F","共生",""],["symbiotic","adj.","F","共生的",""],["system","n.","F","系統",""],["tissue","n.","FNU","（動植物的）組織",""],["tree ring","n.","F","年輪",""],["trunk","n.","F","樹幹",""],["twig","n.","F","小樹枝",""],["vitamin","n.","FN","維他命；維生素",""],["water cycle","n.","F","水循環",""],["weed","n.","F","野草",""],["wither","","F","凋謝","同義：shrivel, fade"],["account","n.","G","帳目；帳單；帳戶",""],["accountable","adj.","G","負責的",""],["accountant","n.","G","會計師",""],["acquire","v.","G","獲得",""],["administrative","adj.","G","行政的",""],["advertising","n.","G","（總稱）廣告",""],["agenda","n.","G","議程",""],["agreement","n.","G","同意；協定",""],["alternative","adj./n.","G","可供選擇的；可供選擇的事物；方式",""],["announce","v.","GI","宣佈；宣告；公諸於眾；公佈；發表",""],["approach","n.","G","方法",""],["approval","n.","G","贊成；同意",""],["assess","v.","G","評估（財產價值）；評定",""],["asset","n.","G","有用的東西；優點；長處",""],["assign","v.","G","分配",""],["audit","n./v.","G","審計",""],["balance","n.","G","餘額；差額",""],["bankrupt","adj.","G","破產的；倒閉的",""],["bankruptcy","n.","G","破產",""],["benchmark","n.","G","基準；水準點；標準",""],["board","n.","G","理事會；委員會；董事會",""],["bond","n.","G","債券",""],["brainstorm","v.","G","腦力激盪；集思廣益",""],["breakthrough","n.","G","突破；重大進展",""],["bureaucracy","n.","G","官僚主義",""],["capital","n.","G","資本；資金",""],["carry out","v.","G","執行；貫徹",""],["commercial","adj.","G","商業化；商用的",""],["competitor","n.","G","競爭者；對手",""],["compromise","v.","G","妥協；折衷；和解",""],["concede","v.","G","容忍；容許；讓步",""],["conclusive","adj.","G","決定性的；勿庸置疑的",""],["conference","n.","G","會議；協商；討論會",""],["consensus","n.","G","一致的意見；共識",""],["consolidate","v.","G","結合；合併；強化",""],["consumer","n.","G","消費者；顧客",""],["contract","n.","G","契約；合同",""],["contractor","n.","G","立契約人；承包商",""],["contribute","v.","G","貢獻",""],["convention","n.","GR","慣例；常規；大會",""],["converse","v.","G","談話；交談",""],["convince","v.","G","使信服",""],["corporate","adj.","G","企業的；團體的",""],["corporation","n.","G","公司",""],["cost-effective","adj.","G","符合成本效益的",""],["credibility","n.","G","信譽",""],["credible","adj.","G","可信的；可靠的",""],["credit","n.","GI","信用；信譽；功勞；學分；（某門功課的）及格記錄",""],["criterion","n.","G","規範；標準","複數：criteria"],["currency","n.","G","貨幣；流通；通用",""],["cut down","v. phr.","G","削減；縮短",""],["dealer","n.","G","商人；業者",""],["debit card","n.","G","存款戶持有的借方卡",""],["debt","n.","G","債；債務",""],["decision making","phr.","G","決策",""],["decline","n./v.","GJ","衰落；衰退；下降",""],["deduction","n.","G","扣除；扣除額",""],["deficit","n.","G","赤字；虧損額",""],["demand","v./n.","G","(v.) 要求；(n.) 需求",""],["demonstration","n.","G","示範；實證",""],["deposit","n./v.","GL","押金；保證金；存款；礦床",""],["devaluation","n.","G","貶值",""],["diplomacy","n.","G","外交手腕；交際手段",""],["discrepancy","n.","G","差異；不同；不一致",""],["dissuade","v.","G","勸阻",""],["due","adj./n.","GI","應付的；到期的；該發生的；(n.) 會費",""],["earnings","n.","G","薪水；工資；收益",""],["employee","n.","G","僱員",""],["employer","n.","G","雇主",""],["enterprise","n.","G","企業",""],["entrepreneur","n.","G","企業家；主辦人",""],["estimate","v.","G","估計；估價",""],["evaluation","n.","GI","評價",""],["exempt from","v. phr.","G","被免除的；豁免的",""],["expand","v.","G","擴張；擴大",""],["expenditure","n.","G","消費；開銷",""],["expense","n.","G","消耗；消費",""],["export","v.","G","輸出；出口",""],["finance","n.","G","財政學；財政；財源",""],["firm","n.","G","公司；商行",""],["fiscal","adj.","G","財政的；會計的",""],["fluctuation","n.","G","波動；起伏；漲落",""],["franchise","n.","G","特許經營權；經銷權；加盟權",""],["forward","v.","G","轉寄；轉送",""],["free ride","n.","G","搭便車",""],["fund","n.","G","基金；專款",""],["gross","adj.","G","總共的；全部的",""],["headquarters","n.","G","總公司；總部；司令部",""],["import","v.","G","輸入；進口",""],["in exchange for","phr.","G","換取",""],["influential","adj.","G","有影響",""],["integrate","v.","G","統合；整合",""],["internship","n.","GI","實習",""],["inventory","n.","G","詳細目錄；清單；存貨",""],["invoice","n.","G","發票；發貨清單",""],["launch","v.","G","開辦；展開；發起；開始",""],["lease","v./n.","G","租約；租契；租賃",""],["marketing","n.","G","市場營銷",""],["merge","v.","G","合併；併吞",""],["monopoly","n.","G","壟斷；獨佔；專賣",""],["negotiate","v.","G","談判",""],["obligation","n.","G","義務",""],["on behalf of","phr.","G","代表",""],["order","n./v.","G","訂單；訂貨；匯單；匯票",""],["organization","n.","G","組織",""],["patent","n./v.","G","專利；(v.) 取得專利",""],["payment","n.","G","支付；付款",""],["pension","n.","G","養老金",""],["persuade","v.","G","說服；勸服",""],["petition","n./v.","G","請願","動詞：petition for"],["phase","n.","G","階段",""],["postpone","v.","GI","延遲；延期；使延期",""],["preliminary","adj.","G","初步的；開始的",""],["premise","n.","G","前提",""],["procedure","n.","GHT","程序；程式；手續",""],["profit","n.","G","利潤；收益；營利",""],["propose","v.","G","提議；建議",""],["proposition","n.","G","提案；建議；計畫",""],["prospect","n.","G","展望；期望",""],["prospectus","n.","G","計畫書；說明書",""],["prosperity","n.","G","繁榮；成功；興隆",""],["purchase","v./n.","G","購買",""],["quota","n.","G","定量；定額；配額",""],["quote","v.","GI","報價；引用",""],["reach consensus","phr.","G","達成共識",""],["real estate","n.","G","房地產",""],["receipt","n.","G","收據",""],["reconcile","v.","G","調和；調解",""],["remuneration","n.","G","報酬；酬勞",""],["rent","n./v.","G","租金；租費；(v.) 租用",""],["retail","n./adj.","G","零售；(adj.) 零售的",""],["return","v./n.","G","回報",""],["revenue","n.","G","收益；歲入；稅收",""],["rewarding","adj.","G","獎勵的",""],["rival","n.","G","競爭者；對手；匹敵者",""],["salary","n.","G","薪資",""],["scheme","n./v.","G","設計；圖謀；(v.) 計畫",""],["seminar","n.","GI","研討會；討論課；講習會",""],["shareholder","n.","G","股東",""],["social security","n.","G","社會保障",""],["solution","n.","GH","解決方案；溶液；溶劑",""],["statement","n.","G","聲明；陳述",""],["stock","n.","G","公債；證券；股票",""],["strategy","n.","G","戰略",""],["supply","n.","G","供應品；供應物；庫存",""],["surplus","n./adj.","G","盈餘；(adj.) 過剩的",""],["tariff","n.","G","關稅",""],["tax","n./v.","G","稅；(v.) 向……課稅",""],["thrive","v.","G","茂盛；興旺；繁榮",""],["trademark","n.","G","注冊商標",""],["undervalue","v.","G","低估價值；看輕",""],["voucher","n.","G","保證人；憑證；折價券",""],["warehouse","n.","G","倉庫；貨棧；大商店",""],["withdraw","v.","G","收回；取回；撤回；提款",""],["yield","v./n.","G","產生（效果、收益等）；(n.) 產量；收穫量；收益",""],["acid","n.","H","酸","形容詞：acidic"],["alchemy","n.","H","煉金術",""],["artificial","adj.","H","人造的",""],["calcium","n.","H","鈣",""],["carbon","n.","H","碳",""],["chemistry","n.","HT","化學",""],["cohesive","adj.","H","有凝聚力的；聚合的",""],["composition/makeup","n.","H","成分",""],["compound","n.","H","化合物",""],["crude oil","n.","H","原油",""],["dissolve","v.","H","溶解",""],["dose","n.","H","劑量",""],["drug","n.","H","藥物",""],["element","n.","H","元素",""],["equilibrium","n.","H","平衡",""],["experiment","n.","H","實驗；試驗",""],["fiber","n.","H","纖維",""],["formula","n.","H","公式",""],["gas","n.","H","氣",""],["gasoline","n.","H","汽油",""],["hydrogen","n.","H","氫",""],["hypothesis","n.","HJ","假說",""],["medicine","n.","H","醫藥",""],["methane","n.","HJ","甲烷",""],["neutron","n.","H","中子",""],["observation","n.","H","觀察",""],["oxidation","n.","H","氧化",""],["oxide","n.","H","氧化物",""],["oxygen","n.","H","氧",""],["petroleum","n.","HT","石油","同義：oil"],["pharmaceutical","adj.","H","製藥的/藥方的",""],["pharmacy","n.","HN","藥房；藥局",""],["plastic","n.","H","塑膠",""],["reaction","n./v.","HN","反應","動詞：react"],["refine","v.","H","提煉；精煉",""],["results","n.","H","結果",""],["substance","n.","H","物質","matter; material"],["synthetic material","n.","H","合成材料",""],["test tube","n.","H","試管",""],["theory","n.","HU","理論",""],["academic year","n. phr.","I","學年",""],["alumnus","n.","I","校友",""],["anecdote","n.","I","軼事",""],["anecdotal","adj.","I","軼事的；趣聞的",""],["announcement","n.","I","公告",""],["anonymous","adj.","IO","匿名的；來源不明的；匿名者；無作者之姓名",""],["assessment","n.","I","評定",""],["auditorium","n.","I","聽眾席；觀眾席",""],["bachelor’s degree","n.","I","學士學位",""],["biased","adj.","I","有偏見的",""],["biography","n.","IO","傳記",""],["break","n.","I","休息",""],["broadcast","v.","I","播放",""],["bulletin","n.","I","公告",""],["cafeteria","","I","食堂（餐廳）","同義：dining hall"],["cancel","v.","I","取消；廢除",""],["caption","n.","I","標題；字幕",""],["career center","n.","I","就業指導中心",""],["cheat","v.","I","欺騙",""],["choir","n.","I","合唱團",""],["circulation","n.","IN","發行量；銷售量；循環",""],["cite","v.","I","引用",""],["colloquial","adj.","I","口語的；會話的",""],["commencement","n.","I","開始",""],["commuter","n.","I","通勤者",""],["compile","v.","I","彙編；編輯",""],["compulsory","adj.","I","必須做的；義務的",""],["condense","v.","IP","壓縮；濃縮",""],["copyright","n.","IT","版權；所有權；著作權",""],["counselor","n.","I","解決問題的指導老師",""],["cram","v.","I","死記硬背功課；臨時抱佛腳",""],["critique","n.","IO","批評；評論；評論文章；（對於文藝作品的）解析",""],["cultivate","v.","I","培養",""],["curve","n.","I","曲線",""],["deadline","n.","I","期限；到期日",""],["declare","v.","I","聲明",""],["degree","n.","I","學位；學銜",""],["department","n.","I","系；部；司；局",""],["dialect","n.","I","方言；土話",""],["diploma","n.","I","畢業文憑；學位證書",""],["discipline","n.","I","學科；紀律；風紀",""],["diversity","n.","I","多樣性",""],["division","n.","I","科",""],["dormitory/dorm","n.","I","宿舍",""],["double major","n.","I","雙主修",""],["draft","n.","I","草案",""],["drop out","v. phr.","I","退出（學校等）",""],["editorial","n.","I","（報刊的） 社論",""],["feature","n.","I","（報紙等的） 特寫；特別報導",""],["elective","n.","I","選修",""],["enroll","v.","I","註冊",""],["exclusive","adj.","I","獨有的；獨佔的；專用的",""],["expel","v.","I","驅逐；趕走",""],["extension","n.","I","延長；延期；緩期",""],["extracurricular","adj.","I","課外的",""],["extracurricular activities","n. phr.","I","課外活動",""],["faculty","n.","I","（大學或院，系的）全體教職員",""],["feedback","n.","I","反饋",""],["field trip","n.","I","實地考察旅行",""],["final","n.","I","期末考",""],["financial aid","","I","財政援助",""],["foster","v.","I","培養；促進",""],["freshman","n.","I","大一",""],["full-time student","n. phr.","I","全日制學生",""],["general education classes","n. phr.","I","通識課",""],["genre","n.","IO","文藝作品的風格（類型）；類型",""],["gossip","n.","I","社會新聞；小道傳聞",""],["host","n./v.","I","主持人；主辦",""],["investigate","v.","I","調查",""],["junior","n.","I","大三",""],["keep grades up","v. phr.","I","保持成績在水準",""],["lab report","n.","I","實驗報告",""],["laboratory","n.","IT","實驗室","同義：lab"],["layout","n.","I","版面設計；版面編排",""],["lecture","n.","I","演講；講課",""],["legible","adj.","I","（字跡等） 清楚的；易讀的",""],["lower division courses","n. phr.","I","低階課程",""],["major","n.","I","主修",""],["make-up test/exam","","I","補考",""],["mandatory","adj.","I","義務的；強制的",""],["master’s degree","n.","I","碩士學位",""],["mentor","n.","I","良師益友；導師",""],["midterm","n.","I","期中考試",""],["minor","n.","I","副修",""],["networking","n.","I","聯網",""],["orientation","n.","I","適應；對新生的介紹",""],["parking lot","n.","I","停車場",""],["plagiarize","v.","I","抄襲；剽竊",""],["potential","adj./n.","I","潛在的；可能的；(n.) 可能性；潛力",""],["prerequisite","adj./n.","I","不可缺的；(n.) 首要事物；必要條件；前提",""],["press","n.","I","報刊；新聞界",""],["primary","adj.","I","初級的；初等的；基層的",""],["principal","n./adj.","I","校長；社長；(adj.) 主要的；首要的",""],["principle","n.","I","原則；原理",""],["proposal","n.","I","建議；提議；計劃；提案",""],["protest","v./n.","I","抗議；反對",""],["quarter","n.","I","季",""],["regret","v./n.","I","後悔",""],["regulation","n.","I","規章；規定",""],["requirements","n.","I","要求",""],["resident advisor","n. phr.","I","常駐顧問",""],["resident","n.","I","居民",""],["rumor","n.","I","謠傳；傳說",""],["scholarship","n.","I","獎學金",""],["secondary","adj.","I","（教育、學校等） 中等的",""],["semester","n.","I","學期",""],["senior","n.","I","大四",""],["skip class","v. phr.","I","翹課",""],["sophomore","n.","I","大二",""],["student loan","n. phr.","I","學生貸款",""],["subjective","adj.","I","主觀的；主觀上的",""],["suspension","n.","I","停職；停學",""],["syllabus","n.","I","教學大綱；課程大綱",""],["term paper","n. phr.","I","學期論文",""],["term","n.","I","學期",""],["tuition","n.","I","學費",""],["tutorial","adj./n.","I","個別指導的；家庭教師",""],["unemployment rate","n.","I","失業率",""],["uniform","n.","I","制服",""],["university","n.","I","大學",""],["acid rain","n.","J","酸雨",""],["air pollution","n.","J","空氣污染",""],["alternative sources of energy","","J","替代能源",""],["carbon dioxide","n.","J","二氧化碳",""],["climate change","n.","J","氣候變化",""],["concentration","","J","濃度",""],["conservation","n.","J","保護",""],["desertification","n.","J","沙漠化",""],["ecology","n.","JU","生態",""],["ecosystem","n.","J","生態系統",""],["electric generation","","J","發電",""],["emission","n./v.","J","發射","動詞：emit"],["encroach","v.","J","侵占",""],["fossil fuel","n.","J","化石燃料",""],["global warming","n.","J","全球變暖",""],["greenhouse effect","n.","J","溫室效應",""],["greenhouse gas","n.","J","溫室氣體",""],["habitat","n.","JU","棲息地",""],["hydropower","","J","水電",""],["landfill","n.","J","垃圾填埋場",""],["pollutants","n.","J","污染物",""],["pollution","n.","J","污染",""],["power generation","","J","發電",""],["recycle","v.","J","回收",""],["reduction","n.","J","減少",""],["solar energy","n.","J","太陽能",""],["sustainable","adj.","J","可持續發展的",""],["tidal energy","n.","JT","潮汐能",""],["wind power","n.","J","風力",""],["background","n.","K","背景",""],["camera","n.","K","相機",""],["enlarge","v.","K","放大",""],["foreground","n.","K","前景",""],["image","n.","K","圖像",""],["mass production","n.","K","批量生產",""],["mercury","n.","KL","汞；水銀",""],["optics","n.","K","光學",""],["panorama","n.","K","全景照片",""],["permanent","adj.","K","永久的；永恆的",""],["plate","n.","K","板",""],["printer","n.","K","印表機",""],["thermometer","n.","K","溫度計",""],["active volcano","n.","L","活火山",""],["aluminum","n.","L","鋁",""],["continental drift","n.","L","大陸漂移",""],["core","n.","L","地核",""],["crust","n.","L","地殼",""],["crystal","n.","L","水晶",""],["decomposition","n.","L","分解",""],["dormant volcano","n.","L","休眠火山",""],["earthquake","n.","LP","地震",""],["epoch","n.","L","時代；重要時期",""],["erosion","n.","L","腐蝕",""],["eruption","n./v.","L","火山噴發；噴發","動詞：erupt"],["evaporation","n.","L","蒸發",""],["extinct volcano","n.","L","死火山",""],["formation","n.","L","形成",""],["geological age","n.","L","地質年齡",""],["geologist","n.","L","地質學家",""],["geology","n.","L","地質",""],["geothermal heat","n.","L","地熱",""],["glacial epoch/period","n.","L","冰河時期",""],["iceberg","n.","L","冰山",""],["landslide","n.","L","滑坡",""],["lava","n.","L","火山岩漿",""],["layer","n.","L","地層",""],["lead","n.","L","鉛",""],["lime","n.","L","石灰",""],["lustrous","adj.","L","光澤的",""],["magma","n.","L","岩漿",""],["magnitude","n.","L","震級",""],["mantle","n.","L","地幔",""],["quartz","n.","L","石英",""],["rock","n.","L","岩",""],["the seabed","","L","海底；海床",""],["shake","v./n.","L","動搖",""],["stone","n.","L","石",""],["stratum","n.","L","層；岩層；地層",""],["temperate","adj.","L","溫帶的",""],["terrestrial","adj.","L","地球的；陸地的",""],["tin","n.","L","錫",""],["tropical","adj.","L","熱帶的",""],["volcanic ash","n.","L","火山灰",""],["volcanic dust","n.","L","火山塵",""],["volcano","n.","L","火山",""],["altitude","n.","M","高度",""],["Antarctica","n.","M","南極",""],["Arctic","n.","M","北極",""],["area","n.","M","地區",""],["atmosphere","n.","MP","大氣層",""],["blizzard","n.","MP","暴風雪","同義：snowstorm"],["border","n.","M","邊緣；邊境",""],["canyon","n.","M","峽谷",""],["cavern/cave","n.","M","洞穴",""],["channel / strait","n.","M","海峽",""],["cliff","n.","M","懸崖；絕壁",""],["coast","n.","M","海岸；海濱",""],["coastland","n.","M","沿海地區",""],["coastline","n.","M","海岸線",""],["compose","v.","M","合成；組成",""],["current","n.","MPU","氣流；水流；（氣）流；潮流",""],["dam","n.","M","水壩；水堤",""],["elevation","n.","M","海拔；上升",""],["equator","n.","M","赤道",""],["expedition","n.","M","探險",""],["flat","adj.","M","平的",""],["forest","n.","M","森林",""],["geography","n.","M","地理學",""],["grassland","n.","M","草原",""],["greens","n.","M","草坪；公共草地",""],["gulf","n.","M","海灣",""],["hemisphere","n.","M","半球",""],["horizon","n.","M","地平線",""],["hurricane","n.","MP","颶風；暴風雨",""],["lake","n.","M","湖",""],["land","n.","M","陸地；土地",""],["landscape","n.","M","（陸上的）風景；景色",""],["latitude","n.","M","緯度",""],["location","n.","M","位置",""],["longitude","n.","M","經度",""],["mountain ranges","n.","M","山脈",""],["mountainous","adj.","M","多山的",""],["ocean","n.","M","海洋",""],["peninsula","n.","M","半島",""],["plain","n.","M","平原",""],["plateau","n.","M","高原",""],["pond","n.","M","池塘",""],["region","n.","M","區域",""],["rocky","adj.","M","多岩石的",""],["sea","n.","M","海",""],["shore","n.","M","岸；濱",""],["storm","n.","M","風暴",""],["stream","n.","M","小河；溪流",""],["swamp","n.","M","沼澤",""],["tempest","n.","MP","風暴；暴風雨","同義：storm"],["tide","n.","MU","潮汐；潮",""],["time zone","n.","M","時區",""],["topography","n.","M","地形；地形學",""],["tropics","n.","M","熱帶地區",""],["typhoon","n.","MP","颱風",""],["undeveloped","adj.","M","未開發的",""],["virgin land","n.","M","未開發的土地",""],["watercourse","n.","M","水道",""],["waterfall","n.","M","瀑布",""],["wetlands","n.","M","沼澤地",""],["woodland","n.","M","林地",""],["abdomen","n.","N","腹部",""],["absorb","v.","N","吸收",""],["abstain","v.","N","避免",""],["abuse","v.","N","濫用",""],["accident","n.","N","意外",""],["ache","n.","N","（持續性地）疼痛",""],["admit","v.","N","准許進入",""],["ambulance","n.","N","救護車",""],["ankle","n.","N","腳踝",""],["antibiotics","n.","N","抗生素（複數）",""],["appendix","n.","N","盲腸",""],["artery","n.","N","動脈",""],["bacterium","n.","N","細菌","複數：bacteria"],["balanced","adj.","N","均衡",""],["bandage","n.","N","繃帶",""],["beware","v.","N","注意",""],["blood","n.","N","血液",""],["blood pressure","n.","N","血壓",""],["blood vessel","n.","N","血管",""],["breathe","v.","N","呼吸",""],["bruise","n.","N","青腫",""],["cancer","n.","N","癌",""],["cardiovascular diseases","n.","N","心臟血管疾病",""],["care","n.","N","照顧",""],["cholesterol","n.","N","膽固醇",""],["clinic","n.","N","診所",""],["cold","n.","N","感冒",""],["condition","n.","N","狀況",""],["conscious","adj.","N","有意識的",""],["contagious","adj.","N","有感染性的",""],["cough","v./n.","N","咳嗽",""],["cough syrup","n.","N","止咳糖漿",""],["critical","adj.","N","關鍵的",""],["cure","v./n.","N","治癒；療法",""],["dentist","n.","N","牙醫",""],["dermatology","n.","N","皮膚科",""],["deteriorate","v.","N","惡化",""],["diabetes","n.","N","糖尿病",""],["diabetic","adj./n.","N","（患）糖尿病的；(n.) 糖尿病患者",""],["diet","n./v.","N","飲食；（以治療、減肥為目的的）節食",""],["digestive system","n.","N","消化系統",""],["emergency room","n.","N","急診室",""],["emotion","n.","N","情感",""],["fever","n.","N","發燒",""],["flu/influenza","n.","N","流行性感冒",""],["genetically modify","phr.","N","基因修改",""],["heal","v.","N","（傷口）癒合；痊癒",""],["health","n.","N","保健",""],["high blood pressure","n.","N","高血壓",""],["hormone","n.","N","荷爾蒙",""],["hospital","n.","N","醫院",""],["hospitalized","adj.","N","住院的",""],["ill","adj.","N","生病的",""],["illness","n.","N","生病；疾病",""],["immune","adj.","N","免疫的",""],["immune system","n.","N","免疫系統",""],["infect","v.","N","傳染（疾病）",""],["infection","n.","N","傳染；感染",""],["infectious","adj.","N","有傳染性的",""],["inflammation","n.","N","發炎",""],["injection","n.","N","注射",""],["injury","n.","N","受傷",""],["instant","adj.","N","立即的",""],["insurance","n.","N","保險",""],["irregular","adj.","N","不平均的",""],["itch","n.","N","癢",""],["kidney","n.","N","腎臟",""],["knee","n.","N","膝；膝蓋",""],["limb","n.","N","肢",""],["liver","n.","N","肝臟",""],["long-term effects","n.","N","長期影響",""],["lung","n.","N","肺",""],["mature","adj.","N","成熟的",""],["medical treatment","n.","N","醫學治療",""],["mental health","n.","N","心理健康",""],["metabolism","n./v.","NU","代謝；新陳代謝","動詞：metabolize"],["muscle","n.","N","肌肉",""],["nerve","n.","NU","神經",""],["nurse","n.","N","護士",""],["nursing home","n.","N","養老院",""],["nutritionist","n.","N","營養師",""],["operate","v.","NT","動手術；開刀；操作；運轉；經營",""],["organic","adj.","N","有機",""],["pain","n.","N","疼痛",""],["palm","n.","N","手掌",""],["paralyzed","adj.","N","癱瘓的",""],["patient","n.","N","病患",""],["perspiration","n./v.","N","汗","動詞：perspire"],["pharmacist","n.","N","藥劑師",""],["physician","n.","N","醫師",""],["pill","n.","N","藥丸",""],["prescription","n.","N","處方籤",""],["prevention","n.","N","預防；預防方法",""],["psychologist","n.","N","心理學家",""],["psychology","n.","N","心理學",""],["recovery","n.","N","復原",""],["relationship","n.","N","關係",""],["relaxed","adj.","N","冷靜",""],["revive","v.","N","復原",""],["runny nose","n.","N","流鼻涕",""],["sanitary","adj.","N","衛生的",""],["scar","n.","N","疤；傷痕",""],["short-term effects","n.","N","短期影響",""],["sneeze","v.","N","打噴嚏",""],["social health","n.","N","社會的健康",""],["sore","adj.","N","痛的；疼痛發炎的",""],["spine","n.","N","脊椎",""],["stomach","n.","N","胃",""],["suffer from","phr.","N","受…之苦；受…困擾",""],["surgeon","n.","N","外科醫生",""],["surgery","n.","N","手術",""],["symptom","n.","N","症狀",""],["syndrome","n.","N","症候群",""],["throat","n.","N","喉嚨",""],["touch","v.","N","接觸；觸摸",""],["toxic","adj.","N","有毒的",""],["transplantation","n.","N","移植",""],["treatment","n.","N","治療",""],["tumor","n.","N","腫瘤",""],["vaccine","n.","N","疫苗",""],["vein","n.","N","靜脈",""],["virus","n.","NT","病毒；濾過性病毒；電腦病毒",""],["vision","n.","NS","視覺；視力",""],["weight loss","n.","N","體重減輕",""],["wheelchair","n.","N","輪椅",""],["white blood cells","n.","N","白血球",""],["acclaimed","adj.","O","受到讚揚的",""],["adapted","adj.","O","改編的",""],["antagonist","n.","O","（戲劇或小說中）反面人物",""],["attribute","v.","O","認為……是某人所做",""],["authenticity","n.","O","真正；確實；純正",""],["author","n.","O","作者",""],["authorship","n.","O","（作品的）原作者；出處；來源",""],["autobiography","n.","O","自傳",""],["bestseller","n.","O","暢銷書",""],["check out a book","v. phr.","O","借出一本書",""],["climax","n.","O","（故事） 高潮",""],["critics","n./v.","O","評論家","動詞：critique"],["drama","n.","OQ","劇本；戲劇",""],["editor","n.","O","編輯者",""],["epic","n.","O","史詩",""],["fable","n.","O","寓言（常以動物擬人化以啟蒙教導）",""],["fairytale","n.","O","童話",""],["fantasy","n.","O","幻想小說",""],["fiction","n.","O","小說；虛構的文學作品",""],["horror","n.","O","恐怖",""],["literacy","n.","O","識字；讀寫能力",""],["literature","n.","O","文學",""],["library card","n.","O","借書證",""],["material","n.","O","素材；資料",""],["moral","n.","O","（故事寓言所含之）教訓；寓意",""],["mystery","n.","O","神秘",""],["non-fiction","n.","O","非小說類文學；紀實文學",""],["novel","n.","O","小說",""],["novelist","n.","O","小說家",""],["overdue","adj.","O","過期的",""],["paperback","n.","O","平裝書",""],["playwright","n.","O","劇作家",""],["plot","n.","O","（小說，戲劇等的）情節",""],["poetry","n.","OQ","詩（總稱）；詩",""],["point of view","n.","O","態度；觀點；看法",""],["protagonist","n.","O","主演；主角",""],["publisher","n.","O","出版商；出版社",""],["review","n.","O","評論；（尤指）對於新著作物或藝術作品之批評",""],["romance","n.","O","愛情小說",""],["science fiction","n.","O","科幻小說",""],["stacks of books","","O","成堆的書籍",""],["setting","n.","O","（事物發生之）背景；環境",""],["theme","n.","O","主題",""],["thriller","n.","O","懸疑的故事或戲劇",""],["tragedy","n.","O","悲劇",""],["well-received","adj.","O","深受大眾肯定",""],["breeze","n.","P","微風",""],["Celsius","n.","P","攝氏",""],["damp","adj.","P","潮濕的","同義：wet; moist; humid"],["devastation","n.","P","毀滅；破壞",""],["disaster","n.","P","災難","同義：calamity, catastrophe"],["drizzle","n./v.","P","細雨",""],["El Niño","","P","聖嬰現象",""],["evaporate","v.","P","蒸發",""],["Fahrenheit","n.","P","華氏",""],["fog","n.","P","霧","同義：mist"],["foggy","adj.","P","有霧的",""],["forecast","n./v.","P","預報","同義：predict"],["frost","n.","P","霜",""],["humidity","n.","P","濕度",""],["lightning","n.","P","閃電",""],["meteorologist","n.","P","氣象學家",""],["meteorology","n.","P","氣象學",""],["moisture","n.","P","潮濕；水分",""],["precipitation","n.","P","（雨、露、雪等）降水",""],["rainy","adj.","P","下雨的；多雨的",""],["smog","n.","P","煙霧",""],["snowy","adj.","P","下雪的；多雪的",""],["sunny","adj.","P","晴",""],["temperature","","P","溫度",""],["the eye of the storm","n.","P","風暴之眼",""],["thunder","n.","P","雷",""],["tornado","n.","P","龍捲風","同義：twister, cyclone"],["tsunami","n.","P","海嘯",""],["vapor","n.","P","蒸汽",""],["weather radar","n.","P","氣象雷達",""],["windy","adj.","P","颳風的；多風的",""],["cast","n.","Q","演員",""],["chorus","n.","Q","合唱",""],["cinema","n.","Q","電影院",""],["classical music","n.","Q","古典音樂",""],["crew","n.","Q","人員",""],["dance","n.","Q","舞蹈",""],["folk music","n.","Q","民間音樂",""],["harmony","n.","Q","和諧",""],["instrumental","adj.","Q","器樂的",""],["Jazz","n.","Q","爵士樂",""],["melody","n.","Q","旋律",""],["music","n.","Q","音樂",""],["musical","n.","Q","音樂舞台劇",""],["musical instrument","n.","Q","樂器",""],["note","n.","Q","音符",""],["opera","n.","Q","歌劇",""],["orchestra","n.","Q","樂隊",""],["pop music","n.","Q","流行音樂",""],["rhythm","n.","Q","節奏",""],["scene","n.","Q","戲劇／電影；場景；場面",""],["stage","n.","Q","舞台",""],["theater","n.","Q","劇院",""],["verse","n.","Q","詩句",""],["vocal","adj.","Q","聲音的",""],["artificial intelligence, AI","n.","R","人工智慧",""],["amnesia","n.","R","失憶症；健忘症；記憶缺失",""],["behavioral science","n.","R","行為科學",""],["brain","n.","R","腦；腦袋",""],["cognitive psychology","n.","R","認知心理學",""],["community","n.","RU","社區；動物的群落或人的部落",""],["computer model","n.","R","電腦模型",""],["computer simulation","n.","R","電腦模擬",""],["consciousness","n.","R","意識",""],["emigration","n.","R","移民出境僑居",""],["ethics","n.","R","倫理學",""],["experimental psychology","n.","R","實驗心理學",""],["genetic disorders","n. phr.","R","遺傳疾病",""],["infectious diseases","n. phr.","R","傳染疫病",""],["information storage","n.","R","資訊儲存",""],["majority","n.","R","多數人","the majority of people"],["memory","n.","RT","記憶；記憶體",""],["memory impairment","n.","R","記憶損壞",""],["mental activity","n.","R","心理活動",""],["mental process","n.","R","心理過程",""],["mental state","n.","R","心理狀態",""],["neuroscience","n.","R","神經系統科學",""],["metropolitan","adj.","R","首都的；大城市的",""],["physical","adj.","R","身體的；物質的；物理的",""],["burglary","n.","S","竊盜；入室盜竊",""],["crime","n.","S","犯罪",""],["death penalty","n.","S","死刑",""],["judge","n./v.","S","法官；(v.) 判斷",""],["juvenile crime","n.","S","青少年犯罪",""],["lawyer","n.","S","律師",""],["misdemeanor","n.","S","輕罪；不端行為",""],["minority","n.","S","少數人",""],["mobility","n.","S","流動",""],["murder","n.","S","謀殺",""],["phenomenon","n.","S","現象",""],["prosecutor","n.","S","檢察官",""],["questionnaire","n.","S","問卷",""],["reflection","n.","S","反映",""],["response","n.","S","反應",""],["robbery","n.","S","搶劫",""],["sentence","n.","S","徒刑",""],["sociologist","n.","S","社會學家",""],["spiritual","adj.","S","心靈的",""],["subject","n.","S","受試者；受實驗對象",""],["suspect","v./n.","S","懷疑；(n.) 嫌犯",""],["surveillance camera","n.","S","監視器",""],["terrorism","n.","S","恐怖主義",""],["terrorist","n.","S","恐怖份子",""],["thief","n.","S","竊賊",""],["urbanization","n.","S","城市化",""],["visible light","n. phr.","S","可見光",""],["advance","v./n.","T","前進；進展",""],["advanced","adj.","T","高級的；高等的；前衛的",""],["advent","n.","T","出現；到來",""],["assembly line","n.","T","裝配線",""],["automated","adj.","T","自動的",""],["automaton","n.","T","自動操作裝置；機器人",""],["automobile","n.","T","汽車",""],["biotechnology","n.","T","生物技術；生物工程",""],["capacity","n.","T","容量；才能；能力",""],["cargo","n.","T","貨物",""],["cell phone","n.","T","行動電話；手機",""],["component","n.","T","構成要素；成分；零件",""],["consecutive","adj.","T","連續的；連貫的",""],["cyberspace","n.","T","網際空間",""],["device","n.","T","設備；儀器；裝置",""],["devise","v.","T","設計；發明；策劃",""],["digital","adj.","T","數位的；數字的",""],["electricity","n.","T","電",""],["electronics","n.","T","電子學；電子工業；電子產品",""],["energy / power","n.","T","能源",""],["engine","n.","T","引擎；發動機",""],["engineer","n.","T","工程師",""],["equipment","n.","T","裝備；設備",""],["facilitate","v.","T","促進；使（更）容易",""],["facility","n.","T","便利的設施；設備",""],["fuel","n.","T","燃料",""],["gadget","n.","T","小機件",""],["gear","n.","T","齒輪",""],["generator","n.","T","發電機；產生器",""],["hands-on","adj.","T","實地操作的；親身體驗的",""],["hydraulic","adj.","T","水壓的；液壓的",""],["Industrial Revolution","n.","T","工業革命",""],["innovative","adj.","T","創新的；革新的","動詞：innovate"],["inspect","v.","T","檢查；審查；視察",""],["inventor","n.","T","發明家",""],["machinery","n.","T","機械",""],["maintenance","n.","T","維護；保養",""],["malfunction","n.","T","故障；發生故障；機能失常",""],["mechanical engineering","n.","T","機械工業",""],["mode","n.","T","樣式；模式；方式；風尚；時尚",""],["motor","n.","T","馬達",""],["network","n.","T","網路系統；廣播；電視網；網絡",""],["power outage","n.","T","電力中斷；斷電",""],["outlet","n.","T","排水口；銷售店；插座；銷路",""],["portable","adj.","T","可攜帶的；輕便的",""],["pressurize","v.","T","加壓於",""],["raw material","n.","T","原料",""],["robot","n.","T","機器人",""],["satellite dish","n.","T","碟形衛星電視天線",""],["smartphone","n.","T","智能手機",""],["solar energy / solar power","n.","T","太陽能",""],["speaker","n.","T","揚聲器；擴音機",""],["turn down","v. phr.","T","關小（聲）",""],["virtual reality","n.","T","虛擬實境；虛擬現實",""],["wireless internet","","T","無線網路",""],["Wi-Fi","n.","T","無線網路",""],["access","n./v.","T","接近；進入；進入的權利；(v.) 取出（資料）；使用",""],["activate","v.","T","使活動；觸發；啟動",""],["automatically","adv.","T","自動地；無意識地",""],["browse","v.","T","流覽；隨便翻閱",""],["cable","n.","T","纜線；電纜；有線電視",""],["command","v.","T","指令；命令；掌握",""],["compliance","n.","T","順從；服從；附和；屈從",""],["configuration","n.","T","結構；構造；配置",""],["connection","n.","T","連線",""],["cutting-edge","adj.","T","最先進的；先鋒地位的",""],["database","n.","T","資料庫",""],["delete","v.","T","刪除",""],["desktop","n.","T","桌上型電腦",""],["download","v.","T","下載",""],["hardware","n.","T","硬體",""],["input","v.","T","輸入電腦",""],["install","v.","T","安裝；安置",""],["laptop","n.","T","筆記型電腦",""],["monitor","n.","T","顯示器",""],["multimedia","adj./n.","T","多媒體",""],["omit","v.","T","忽略；刪除；疏忽",""],["retrieval","n.","T","取回；恢復",""],["scanner","n.","T","掃描器",""],["search engine","n.","T","搜尋引擎",""],["server","n.","T","伺服器",""],["shut down","v.","T","使關閉；使停業",""],["software","n.","T","軟體",""],["state-of-the-art","adj.","T","使用最先進技術的；達到最高水準的",""],["switch","n.","T","開關；驟變",""],["terminology","n.","T","專業術語；專有名詞",""],["the Internet","n.","T","網際網絡",""],["transmission","n.","T","傳輸；傳送",""],["troubleshooting","n.","T","檢修；解決困難的",""],["upgrade","v.","T","升級；提升",""],["upload","v.","T","上傳",""],["up-to-date","adj.","T","最近的；最新的",""],["web page","n.","T","網頁",""],["wireless","n.","T","無線",""],["adaptability","n./v.","U","適應性","動詞：adapt"],["aquarium","n.","U","水族館",""],["aquatic","adj.","U","水棲的",""],["aquatic animal","n.","U","水生動物",""],["aquatic life","n.","U","水生動物",""],["avian","adj.","U","鳥（類）的",""],["beast","n.","U","野獸",""],["bee","n.","U","蜜蜂",""],["beehive","n.","U","蜂箱",""],["behavior","n.","U","行為",""],["bird","n.","U","鳥類",""],["borderline","n./adj.","U","邊界；界線的",""],["breed","n./v.","U","品種；(v.) 繁殖",""],["camouflage","n./v.","U","偽裝",""],["carnivore","n.","U","食肉動物",""],["carnivorous","adj.","U","食肉的",""],["caterpillar","n.","U","毛毛蟲",""],["chimpanzee","n.","U","黑猩猩",""],["classification","n.","U","分類",""],["colony","n.","U","群體 /殖民地",""],["contamination","n.","U","污染",""],["coral","n.","U","珊瑚",""],["coral reef","n.","U","珊瑚礁",""],["crab","n.","U","螃蟹",""],["creature","n.","U","生物",""],["crustaceans","n.","U","甲殼類動物",""],["dinosaur","n.","U","恐龍",""],["display","v.","U","現出；表現",""],["dive","v.","U","潛水",""],["diversification","n.","U","多樣化",""],["dolphin","n.","U","海豚",""],["domesticate/tame","v.","U","馴養",""],["dwindle","v.","U","縮小",""],["endangered","adj.","U","瀕危的",""],["evolution","n.","U","進化",""],["face extinction","phr.","U","面臨滅絕",""],["family","n.","U","科",""],["feather","n.","U","羽毛",""],["fin","n.","U","鰭",""],["fishery","n.","U","漁業",""],["food chain","n.","U","食物鏈",""],["fossil records","n.","U","化石記錄",""],["frog","n.","U","蛙；青蛙",""],["fur","n.","U","毛皮",""],["generation","n.","U","一代",""],["glide","v.","U","滑動；滑行",""],["gorilla","n.","U","大猩猩",""],["hatch","v.","U","孵化",""],["herbivore","n.","U","草食動物",""],["hygiene","","U","衛生",""],["indigenous","adj.","U","土著的；本地的",""],["insect","n.","U","昆蟲",""],["invertebrate","n.","U","無脊椎動物",""],["jellyfish","n.","U","水母；海蜇",""],["larva","n.","U","幼蟲；幼體",""],["livestock","n.","U","牲畜",""],["lizard","n.","U","蜥蜴",""],["lobster","n.","U","龍蝦",""],["mammal","n.","U","哺乳動物",""],["marine","adj.","U","海洋的",""],["marine life","n.","U","海洋生物",""],["microbe","n.","U","微生物",""],["microorganism","n.","U","微生物",""],["mimic","v.","U","模仿",""],["moth","n.","U","蛾",""],["multiply","v.","U","繁殖；增加",""],["native","adj.","U","（某地）原有的動（植）物",""],["nest","n./v.","U","巢；築巢",""],["niche","n.","U","生態區位；合適的位置",""],["oyster","n.","U","牡蠣",""],["physiology","n.","U","生理",""],["population","n.","U","人口；動物（或植物）的總數",""],["predator","n.","U","掠食者；捕食者",""],["predictable","adj.","U","可預言的；可預料的",""],["preservation","n.","U","保存",""],["primitive","adj.","U","原始的；粗糙的；簡單的",""],["reproduction","n./v.","U","繁殖；複製","動詞：reproduce"],["reptile","n.","U","爬蟲類動物",""],["reservation","n.","U","自然保護區",""],["scale","n.","U","規模",""],["scavenger","n.","U","食腐動物",""],["skeleton","n.","U","（動物之）骨骼",""],["snatch","v.","U","搶奪",""],["species","n.","U","物種",""],["time span","n.","U","時間跨度；時間範圍；時間間隔",""],["toad","n.","U","蟾蜍",""],["tortoise","n.","U","陸龜；龜；烏龜",""],["trait","n.","U","特徵",""],["trap","n.","U","陷阱；羅網；捕捉器",""],["turtle","n.","U","龜；海龜",""],["variations","n.","U","變化；變動",""],["vegetation","n.","U","植物",""],["vertebrate","n.","U","脊椎動物",""],["wave","n.","U","浪",""],["whale","n.","U","鯨魚",""],["wing","n.","U","翅膀；翼",""],["worm","n.","U","蟲；蠕蟲",""],["zoology","n.","U","動物學",""]]};
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// 依「；;，,、/」切開，但括號內的不切
+function splitSegments(s){
+  const out = []; let buf = '', depth = 0;
+  for(const ch of String(s)){
+    if('（(【['.includes(ch)) depth++;
+    if('）)】]'.includes(ch)) depth = Math.max(0, depth - 1);
+    if(depth === 0 && '；;，,、/／'.includes(ch)){
+      if(buf.trim()) out.push(buf.trim());
+      buf = '';
+    } else buf += ch;
+  }
+  if(buf.trim()) out.push(buf.trim());
+  return out;
+}
+
+// 常見異體／兩岸用語統一（答案與標準意思都套用）
+const VARIANTS = [
+  ['網絡','網路'],['互聯網','網際網路'],['軟件','軟體'],['硬件','硬體'],['信息','資訊'],['智能','智慧'],['變暖','暖化'],
+  ['數碼','數位'],['視頻','影片'],['電腦類比','電腦模擬'],['沈','沉'],['臺','台'],['裏','裡'],['着','著'],['綫','線'],
+  ['爲','為'],['衞','衛'],['峯','峰'],['僱','雇'],['佔','占'],['蹟','跡'],['麪','麵'],['啓','啟'],['羣','群'],['敎','教'],
+  ['污','汙'],['于','於'],['鈎','鉤'],['却','卻'],['床','床'],['綑','捆'],['鼕','冬'],['祕','秘'],['姊','姐'],['恆','恒'],
+  ['迴','回'],['週','周'],['游泳','游泳'],['煉','鍊'],['菸','煙'],['砲','炮'],['杆','桿']
+];
+function normText(s){
+  let t = String(s || '').normalize('NFKC').toLowerCase();
+  for(const [a, b] of VARIANTS) if(t.indexOf(a) >= 0) t = t.split(a).join(b);
+  return t.replace(/\((n|v|adj|adv|a)\.\)/g, '')
+          .replace(/[\s　.,;:!?'"`~·•…—\-_*+=|\\<>()（）\[\]【】{}「」『』《》〈〉，。、；：！？“”‘’／\/]/g, '');
+}
+
+// 由中文意思產生比對用的關鍵詞
+function buildKeys(meaning){
+  const keys = new Set();
+  const add = k => {
+    if(!k) return;
+    keys.add(k);
+    if(k.length >= 3 && k.endsWith('的')) keys.add(k.slice(0, -1));
+    if(k.length >= 3 && /^[指使]/.test(k)) keys.add(k.slice(1));
+    if(k.length >= 3 && k.endsWith('地')) keys.add(k.slice(0, -1));
+  };
+  for(const seg of splitSegments(meaning)){
+    const s = seg.replace(/\((n|v|adj|adv|a)\.\)/g, '');
+    const core = s.replace(/（[^）]*）|\([^)]*\)|【[^】]*】/g, '');
+    add(normText(core));
+    add(normText(s));
+    // 括號內的同義詞也算（例如「糖類（澱粉）」）
+    (s.match(/（([^）]*)）/g) || []).forEach(p => {
+      const inner = normText(p);
+      if(inner.length >= 2 && !/^(如|指|可指|尤指)/.test(p.slice(1))) add(inner);
+    });
+  }
+  return [...keys].filter(k => k.length >= 1);
+}
+
+function dice(a, b){
+  const A = Array.from(a), B = Array.from(b);
+  const pool = A.slice(); let hit = 0;
+  for(const ch of B){ const i = pool.indexOf(ch); if(i >= 0){ hit++; pool.splice(i, 1); } }
+  return 2 * hit / (A.length + B.length);
+}
+
+// 自動判斷「意思相近」：符合任一條即算對
+function matchOne(a, k){
+  if(!a || !k) return false;
+  if(a === k) return true;
+  if(k.length >= 2 && a.indexOf(k) >= 0){                                            // 答案包含關鍵詞（例：農業 → 農業的）
+    const extra = a.replace(k, '');
+    if(a.length > k.length + 3) return false;
+    if(/[者家員師人商器機性學]/.test(extra)) return false;                               // 加上這些字通常變成別的意思（消費 → 消費者）
+    return true;
+  }
+  if(k.length === 1 && a.indexOf(k) >= 0 && Array.from(a).length <= 2) return true;   // 單字意思（例：牛 → 公牛）
+  if(a.length >= 2 && k.indexOf(a) >= 0 && a.length >= k.length - 1) return true;    // 關鍵詞包含答案、只差一個字
+  if(a.length >= 3 && k.length >= 3 && dice(a, k) >= 0.75) return true;               // 用字大多相同（例：全球暖化／全球變暖）
+  return false;
+}
+function autoMatch(input, keys){
+  const parts = splitSegments(String(input).replace(/\s+/g, '，')).map(normText).filter(Boolean);
+  const whole = normText(input);
+  if(!whole) return false;
+  const cands = parts.length ? parts.concat([whole]) : [whole];
+  return cands.some(a => keys.some(k => matchOne(a, k)));
+}
+
+function shuffle(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
+
+function buildQueue(pool, n){
+  const q = [];
+  if(!pool.length) return q;
+  while(q.length < n){
+    const s = shuffle(pool.slice());
+    const last = q[q.length - 1];
+    if(last && s.length > 1 && s[0].id === last.id){ const t = s[0]; s[0] = s[s.length - 1]; s[s.length - 1] = t; }
+    for(const it of s){ if(q.length >= n) break; q.push(it); }
+  }
+  return q;
+}
+
+function buildWords(data){
+  const themes = data.themes.map(t => ({ key:t[0], en:t[1], zh:t[2] }));
+  const words = data.words.map(w => {
+    const item = { id:w[0].toLowerCase(), word:w[0], pos:w[1], themes:w[2].split(''), mean:w[3], note:w[4] };
+    item.keys = buildKeys(item.mean);
+    item.posMain = (item.pos.split('/')[0] || '');
+    return item;
+  });
+  return { themes, words };
+}
+
+// 選擇題干擾選項：意思不能和正確答案重疊，優先同詞性、同主題
+function pickDistractors(item, pool, all, n){
+  const used = new Set(item.keys);
+  const meanSeen = new Set([normText(item.mean)]);
+  const chosen = [];
+  const ok = c => {
+    if(c.id === item.id) return false;
+    const m = normText(c.mean);
+    if(meanSeen.has(m)) return false;
+    if(c.keys.some(k => used.has(k))) return false;
+    if(c.keys.some(k => item.keys.some(x => k.length >= 2 && x.length >= 2 && (k.indexOf(x) >= 0 || x.indexOf(k) >= 0)))) return false;
+    return true;
+  };
+  const take = list => {
+    for(const c of shuffle(list.slice())){
+      if(chosen.length >= n) return;
+      if(!ok(c)) continue;
+      chosen.push(c); meanSeen.add(normText(c.mean)); c.keys.forEach(k => used.add(k));
+    }
+  };
+  take(pool.filter(c => c.posMain === item.posMain));
+  if(chosen.length < n) take(pool);
+  if(chosen.length < n) take(all.filter(c => c.posMain === item.posMain));
+  if(chosen.length < n) take(all);
+  return chosen;
+}
+/*LOGIC-END*/
+
+// ================= 設定 =================
+const MODES = [
+  { key:'mc',   label:'選擇題',   desc:'4 選 1，適合快速複習' },
+  { key:'type', label:'輸入中文', desc:'自己想出意思，加深記憶' }
+];
+const POS_OPTS = [
+  { key:'on',  label:'顯示詞性', desc:'例：harvest  v./n.' },
+  { key:'off', label:'不顯示',   desc:'只顯示英文單字' }
+];
+const MIN_THEMES = 1, MAX_THEMES = 5;
+const MIN_COUNT = 10, MAX_COUNT = 20;
+const NB_MAX = 20, NB_MASTER = 2;
+const STORE_KEY = 'ielts-vocab-trainer-v1';
+const NB_KEY = 'ielts-vocab-notebook-v1';
+
+const $ = id => document.getElementById(id);
+const DB = buildWords(DATA);
+const THEMES = DB.themes;
+const THEME = new Map(THEMES.map(t => [t.key, t]));
+const ALL = DB.words;
+const BY_ID = new Map(ALL.map(w => [w.id, w]));
+const BY_THEME = {};
+THEMES.forEach(t => { BY_THEME[t.key] = ALL.filter(w => w.themes.includes(t.key)); });
+
+const state = {
+  themes: new Set(), count: 15, countValid: true, mode: 'mc', pos: 'on',
+  quiz: null, round: 0, origin: 'normal', quizThemes: [], lastWrong: []
+};
+const clampCount = n => Math.min(MAX_COUNT, Math.max(MIN_COUNT, n));
+const modeObj = k => MODES.find(m => m.key === k) || MODES[0];
+
+// ================= 儲存 =================
+let storageOk = true;
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ storageOk = false; return null; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, v); return true; }catch(e){ storageOk = false; return false; } }
+function loadSettings(){
+  try{
+    const s = JSON.parse(lsGet(STORE_KEY) || 'null');
+    if(!s) return;
+    if(Array.isArray(s.themes)) s.themes.filter(k => THEME.has(k)).slice(0, MAX_THEMES).forEach(k => state.themes.add(k));
+    if(Number.isInteger(s.count) && s.count >= MIN_COUNT && s.count <= MAX_COUNT) state.count = s.count;
+    if(MODES.some(m => m.key === s.mode)) state.mode = s.mode;
+    if(s.pos === 'on' || s.pos === 'off') state.pos = s.pos;
+  }catch(e){}
+}
+function saveSettings(){
+  lsSet(STORE_KEY, JSON.stringify({ themes:[...state.themes], count:state.count, mode:state.mode, pos:state.pos }));
+}
+
+// ================= 錯題本 =================
+let notebook = {};
+function loadNotebook(){
+  notebook = {};
+  try{
+    const o = JSON.parse(lsGet(NB_KEY) || '{}');
+    if(o && typeof o === 'object'){
+      Object.keys(o).forEach(id => {
+        const e = o[id];
+        if(BY_ID.has(id) && e && typeof e === 'object')
+          notebook[id] = { w: Math.max(1, e.w | 0), s: Math.max(0, e.s | 0), t: Number(e.t) || 0 };
+      });
+    }
+  }catch(e){ notebook = {}; }
+}
+function saveNotebook(){ lsSet(NB_KEY, JSON.stringify(notebook)); }
+function nbRecord(item, ok){
+  const e = notebook[item.id];
+  if(!ok){
+    if(e){ e.w++; e.s = 0; e.t = Date.now(); saveNotebook(); return 'again'; }
+    notebook[item.id] = { w:1, s:0, t:Date.now() }; saveNotebook(); return 'added';
+  }
+  if(e){
+    e.s++;
+    if(e.s >= NB_MASTER){ delete notebook[item.id]; saveNotebook(); return 'removed'; }
+    saveNotebook(); return 'progress';
+  }
+  return null;
+}
+function nbEntries(){
+  return Object.keys(notebook).map(id => Object.assign({ item:BY_ID.get(id) }, notebook[id]))
+    .filter(e => e.item).sort((a, b) => (b.w - a.w) || (b.t - a.t));
+}
+let nbOpen = false;
+function themeBadges(item){
+  return item.themes.map(k => `<span class="badge">${k} ${esc(THEME.get(k).zh)}</span>`).join(' ');
+}
+function renderNotebook(){
+  const list = nbEntries(), n = list.length;
+  const pill = $('nbCount');
+  pill.textContent = `${n} 字`;
+  pill.className = 'pill' + (n ? ' pill-bad' : '');
+  const p = $('btnNbPractice');
+  p.disabled = !n;
+  p.textContent = n ? `練習錯題本（${Math.min(n, NB_MAX)} 題）` : '練習錯題本';
+  ['btnNbToggle', 'btnNbCopy', 'btnNbClear'].forEach(id => { $(id).disabled = !n; });
+  if(!n) nbOpen = false;
+  $('btnNbToggle').textContent = nbOpen ? '收起清單' : '查看清單';
+  $('nbDesc').textContent = (n ? '' : '目前沒有錯題。') +
+    `答錯的單字會自動收進錯題本，關閉網頁後仍會保留；同一個字之後連續答對 ${NB_MASTER} 次，就會自動移出。練習時會使用下方選擇的作答方式。` +
+    (storageOk ? '' : '（⚠ 這個瀏覽器目前不允許網頁儲存資料，例如無痕模式，錯題本與設定在關閉後不會保留。）');
+  const box = $('nbList');
+  box.hidden = !nbOpen;
+  if(!nbOpen){ box.innerHTML = ''; return; }
+  box.innerHTML = list.map(e => `
+    <div class="r-row nb">
+      <div>
+        <div class="r-word">${esc(e.item.word)}${e.item.pos ? ` <i>${esc(e.item.pos)}</i>` : ''}</div>
+        <div class="r-mean">${esc(e.item.mean)}</div>
+        <div class="r-ans">答錯 ${e.w} 次${e.s ? `　·　已連續答對 ${e.s} 次` : ''}　·　${e.item.themes.map(k => k + ' ' + esc(THEME.get(k).zh)).join('、')}</div>
+      </div>
+      <button type="button" class="icon-btn" data-del="${esc(e.item.id)}" aria-label="從錯題本移除 ${esc(e.item.word)}">✕</button>
+    </div>`).join('');
+}
+
+// ================= 小工具 =================
+let toastTimer = null;
+function toast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+function copyText(text, okMsg){
+  if(!text) return;
+  const done = () => toast(okMsg);
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){}
+    ta.remove();
+    ok ? done() : toast('複製失敗，請手動選取文字');
+  };
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+const wordLine = it => `${it.word}${it.pos ? ' (' + it.pos + ')' : ''}　${it.mean}`;
+
+// ================= 對話框 =================
+let modalCancel = null;
+function openModal(opts){
+  $('modalTitle').textContent = opts.title || '';
+  $('modalBody').innerHTML = opts.html || '';
+  const box = $('modalActions'); box.innerHTML = '';
+  (opts.actions || []).forEach(a => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn ' + (a.cls || ''); b.textContent = a.label;
+    b.addEventListener('click', () => { if(a.onClick) a.onClick(); });
+    box.appendChild(b);
+  });
+  modalCancel = opts.onCancel || closeModal;
+  $('modal').hidden = false;
+  document.body.classList.add('modal-open');
+  const f = box.querySelector('.autofocus') || box.querySelector('button');
+  if(f) f.focus();
+}
+function closeModal(){
+  $('modal').hidden = true;
+  document.body.classList.remove('modal-open');
+  modalCancel = null;
+}
+const modalOpen = () => !$('modal').hidden;
+
+// ================= 設定畫面 =================
+function selectedThemes(){ return [...state.themes].sort(); }
+function selectedPool(){
+  const seen = new Set(), out = [];
+  selectedThemes().forEach(k => BY_THEME[k].forEach(w => { if(!seen.has(w.id)){ seen.add(w.id); out.push(w); } }));
+  return out;
+}
+function buildThemeGrid(){
+  const g = $('themeGrid'); g.innerHTML = '';
+  THEMES.forEach(t => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'theme'; b.dataset.theme = t.key;
+    b.title = t.en;
+    b.innerHTML = `<span class="L">${t.key}</span><span class="nm">${esc(t.zh)}</span><span class="n">${BY_THEME[t.key].length} 字 · ${esc(t.en)}</span>`;
+    b.addEventListener('click', () => {
+      if(state.themes.has(t.key)) state.themes.delete(t.key);
+      else if(state.themes.size < MAX_THEMES) state.themes.add(t.key);
+      saveSettings(); updateSetup();
+    });
+    g.appendChild(b);
+  });
+}
+function updateSetup(){
+  const n = state.themes.size, full = n >= MAX_THEMES;
+  document.querySelectorAll('.theme').forEach(b => {
+    const on = state.themes.has(b.dataset.theme);
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.disabled = full && !on;
+  });
+  const c = $('themeCounter');
+  c.textContent = `已選 ${n} / ${MAX_THEMES}`;
+  c.className = 'pill' + (n >= MIN_THEMES ? ' pill-ok' : '');
+  const pool = selectedPool();
+  $('poolInfo').textContent = !n ? '尚未選擇主題。' :
+    `已選：${selectedThemes().map(k => k + ' ' + THEME.get(k).zh).join('、')}，共 ${pool.length} 個單字。` + (full ? '（已達上限 5 個）' : '');
+
+  $('countMinus').disabled = state.count <= MIN_COUNT;
+  $('countPlus').disabled = state.count >= MAX_COUNT;
+  $('countInput').classList.toggle('invalid', !state.countValid);
+  $('countErr').textContent = state.countValid ? '' : `請輸入 ${MIN_COUNT} ~ ${MAX_COUNT} 之間的整數`;
+  const warn = $('countWarn');
+  if(state.countValid && n && pool.length < state.count){
+    warn.hidden = false;
+    warn.textContent = `所選主題只有 ${pool.length} 個單字，少於 ${state.count} 題，部分單字會重複出題。`;
+  } else warn.hidden = true;
+
+  const themesOk = n >= MIN_THEMES && n <= MAX_THEMES;
+  const sb = $('btnStart');
+  sb.disabled = !(themesOk && state.countValid);
+  if(!themesOk) sb.textContent = `請先選擇 ${MIN_THEMES} ~ ${MAX_THEMES} 個主題`;
+  else if(!state.countValid) sb.textContent = `請輸入 ${MIN_COUNT} ~ ${MAX_COUNT} 題`;
+  else sb.textContent = `開始測驗（${modeObj(state.mode).label}・${state.count} 題）`;
+}
+const countRaw = () => String($('countInput').value).trim().replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0));
+function setCount(n){
+  state.count = clampCount(n); state.countValid = true;
+  $('countInput').value = state.count;
+  saveSettings(); updateSetup();
+}
+function onCountInput(){
+  const raw = countRaw(), n = Number(raw);
+  if(/^\d+$/.test(raw) && n >= MIN_COUNT && n <= MAX_COUNT){ state.count = n; state.countValid = true; saveSettings(); }
+  else state.countValid = false;
+  updateSetup();
+}
+function commitCount(){
+  if(state.countValid){ $('countInput').value = state.count; return; }
+  const n = parseInt(countRaw(), 10);
+  const fixed = isNaN(n) ? state.count : clampCount(n);
+  setCount(fixed);
+  toast(`題數範圍是 ${MIN_COUNT} ~ ${MAX_COUNT}，已設為 ${fixed} 題`);
+}
+function renderSeg(el, items, current, onPick){
+  el.innerHTML = '';
+  items.forEach(it => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'seg-btn' + (it.key === current ? ' on' : '');
+    b.setAttribute('aria-pressed', it.key === current ? 'true' : 'false');
+    b.dataset.key = it.key;
+    b.innerHTML = `${esc(it.label)}<small>${esc(it.desc)}</small>`;
+    b.addEventListener('click', () => onPick(it.key));
+    el.appendChild(b);
+  });
+}
+function renderMode(){ renderSeg($('modeSeg'), MODES, state.mode, k => { state.mode = k; saveSettings(); renderMode(); updateSetup(); }); }
+function renderPos(){ renderSeg($('posSeg'), POS_OPTS, state.pos, k => { state.pos = k; saveSettings(); renderPos(); }); }
+function randomThemes(k){
+  state.themes = new Set(shuffle(THEMES.map(t => t.key)).slice(0, k));
+  saveSettings(); updateSetup();
+}
+function show(name){
+  ['setup', 'quiz', 'result'].forEach(s => { $(s).hidden = (s !== name); });
+  window.scrollTo(0, 0);
+}
+
+// ================= 測驗 =================
+function modeLabel(q){
+  const m = modeObj(q.mode).label;
+  if(q.kind === 'retry') return `錯題再練・第 ${q.round} 輪・${m}`;
+  if(q.kind === 'notebook') return `錯題本練習・${m}`;
+  return `${q.themes.join('・')}・${m}`;
+}
+function startNew(){
+  if(!state.countValid) commitCount();
+  const pool = selectedPool();
+  if(state.themes.size < MIN_THEMES || state.themes.size > MAX_THEMES || !pool.length){
+    toast(`請先選擇 ${MIN_THEMES} ~ ${MAX_THEMES} 個主題`); updateSetup(); show('setup'); return;
+  }
+  state.round = 0; state.origin = 'normal';
+  state.quizThemes = selectedThemes();
+  startQuiz(buildQueue(pool, state.count), 'normal', pool);
+}
+function startNotebook(){
+  const list = nbEntries();
+  if(!list.length){ toast('錯題本目前是空的'); renderNotebook(); return; }
+  state.round = 0; state.origin = 'notebook';
+  const items = shuffle(list.slice(0, NB_MAX).map(e => e.item));
+  startQuiz(items, 'notebook', ALL);
+}
+function startQuiz(items, kind, pool){
+  if(!items.length) return;
+  closeModal();
+  state.quiz = {
+    items, idx:0, records:[], kind, mode:state.mode, round:state.round, themes:state.quizThemes.slice(),
+    pool: pool || ALL, start:Date.now(), phase:'answer', answeredAt:0, nbAdded:0, nbRemoved:0, endedEarly:false,
+    opts:null, pending:null
+  };
+  $('qMode').textContent = modeLabel(state.quiz);
+  $('mcBox').hidden = state.quiz.mode !== 'mc';
+  $('typeBox').hidden = state.quiz.mode !== 'type';
+  $('kbdTip').textContent = state.quiz.mode === 'mc'
+    ? '1～4：選擇答案　·　Enter：下一題　·　Esc：結束測驗'
+    : 'Enter：回答／下一題　·　自評時 1：算對、2：答錯　·　Esc：結束測驗';
+  show('quiz');
+  showQuestion();
+}
+function showQuestion(){
+  const q = state.quiz, it = q.items[q.idx];
+  q.phase = 'answer'; q.pending = null;
+  $('qNum').textContent = q.idx + 1;
+  $('qTotal').textContent = q.items.length;
+  $('qTheme').innerHTML = themeBadges(it);
+  $('qWord').textContent = it.word;
+  const pe = $('qPos');
+  pe.hidden = !(state.pos === 'on' && it.pos);
+  pe.textContent = it.pos;
+  $('progressBar').style.width = (q.idx / q.items.length * 100) + '%';
+  $('feedback').hidden = true;
+  $('judgeBox').hidden = true;
+  $('btnNext').hidden = true;
+  if(q.mode === 'mc'){
+    const opts = shuffle([it].concat(pickDistractors(it, q.pool, ALL, 3)));
+    q.opts = opts;
+    const box = $('opts'); box.innerHTML = '';
+    opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.dataset.idx = i;
+      b.innerHTML = `<span class="k">${i + 1}</span><span class="t">${esc(o.mean)}</span><span class="r"></span>`;
+      b.addEventListener('click', () => chooseOption(i));
+      box.appendChild(b);
+    });
+    $('mcActions').hidden = false;
+    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  } else {
+    const inp = $('answerInput');
+    inp.value = ''; inp.disabled = false; inp.classList.remove('ok', 'bad', 'ask', 'shake');
+    $('inputMsg').textContent = '';
+    $('answerActions').hidden = false;
+    try{ inp.focus({ preventScroll:true }); }catch(e){ inp.focus(); }
+  }
+}
+function feedbackHtml(it, title, cls, extra){
+  const nbNote = it._nbNote ? `<div class="fb-note">${it._nbNote}</div>` : '';
+  return `<div class="fb-title">${title}</div>
+    <div class="fb-line"><span class="fb-label">中文意思</span><span class="fb-mean">${esc(it.mean)}</span></div>
+    ${extra || ''}
+    ${it.note ? `<div class="fb-line"><span class="fb-label">補充</span><span>${esc(it.note)}</span></div>` : ''}
+    ${nbNote}`;
+}
+function nbNoteText(it, nb){
+  if(nb === 'added') return '📒 已加入錯題本';
+  if(nb === 'again') return `📒 錯題本：這個字已答錯 ${notebook[it.id].w} 次`;
+  if(nb === 'progress') return `📒 錯題本：已連續答對 ${notebook[it.id].s} 次，再答對 ${NB_MASTER - notebook[it.id].s} 次就移出`;
+  if(nb === 'removed') return `🎓 已連續答對 ${NB_MASTER} 次，從錯題本移出`;
+  return '';
+}
+// 記錄一題的結果
+function finalize(ok, how, input){
+  const q = state.quiz, it = q.items[q.idx];
+  q.phase = 'done'; q.answeredAt = Date.now();
+  const nb = nbRecord(it, ok);
+  if(nb === 'added') q.nbAdded++;
+  if(nb === 'removed') q.nbRemoved++;
+  q.records.push({ item:it, ok, how, input });
+  return nbNoteText(it, nb);
+}
+function showNext(){
+  const q = state.quiz;
+  const nbtn = $('btnNext');
+  nbtn.textContent = (q.idx + 1 >= q.items.length) ? '查看成績 →' : '下一題 →';
+  nbtn.hidden = false;
+  $('progressBar').style.width = ((q.idx + 1) / q.items.length * 100) + '%';
+  setTimeout(() => { if(!modalOpen() && state.quiz === q){ try{ nbtn.focus({ preventScroll:true }); }catch(e){ nbtn.focus(); } } }, 0);
+}
+
+// ----- 選擇題 -----
+function chooseOption(i){
+  const q = state.quiz; if(!q || q.phase !== 'answer' || q.mode !== 'mc' || modalOpen()) return;
+  const it = q.items[q.idx];
+  const skip = i < 0;
+  const picked = skip ? null : q.opts[i];
+  const ok = !skip && picked.id === it.id;
+  const note = finalize(ok, skip ? 'skip' : 'mc', skip ? '' : picked.mean);
+  document.querySelectorAll('#opts .opt').forEach((b, j) => {
+    b.disabled = true;
+    const o = q.opts[j];
+    if(o.id === it.id){ b.classList.add('correct'); b.querySelector('.r').textContent = '✔'; }
+    else if(j === i){ b.classList.add('wrong'); b.querySelector('.r').textContent = '✘'; }
+    else b.classList.add('dim');
+  });
+  $('mcActions').hidden = true;
+  const fb = $('feedback');
+  it._nbNote = note;
+  let extra = '';
+  if(!ok && picked) extra = `<div class="fb-line"><span class="fb-label">你選的</span><span>${esc(picked.mean)}<br><small style="color:var(--muted)">（這是 ${esc(picked.word)} 的意思）</small></span></div>`;
+  fb.className = 'feedback ' + (ok ? 'ok' : 'bad');
+  fb.innerHTML = feedbackHtml(it, ok ? '✔ 正確！' : (skip ? '⏭ 不知道' : '✘ 答錯了'), ok ? 'ok' : 'bad', extra);
+  fb.hidden = false;
+  delete it._nbNote;
+  showNext();
+}
+
+// ----- 輸入題 -----
+function submitTyped(skip){
+  const q = state.quiz; if(!q || q.phase !== 'answer' || q.mode !== 'type' || modalOpen()) return;
+  const it = q.items[q.idx];
+  const inp = $('answerInput');
+  const val = String(inp.value).trim().replace(/\s+/g, ' ');
+  if(!skip && !val){
+    $('inputMsg').textContent = '請先輸入中文意思，或按「不知道」。';
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
+    inp.focus();
+    return;
+  }
+  inp.disabled = true;
+  $('answerActions').hidden = true;
+  $('inputMsg').textContent = '';
+  const fb = $('feedback');
+  if(skip){
+    it._nbNote = finalize(false, 'skip', '');
+    inp.classList.add('bad');
+    fb.className = 'feedback bad';
+    fb.innerHTML = feedbackHtml(it, '⏭ 不知道', 'bad', '');
+    fb.hidden = false; delete it._nbNote;
+    showNext();
+    return;
+  }
+  if(autoMatch(val, it.keys)){
+    it._nbNote = finalize(true, 'auto', val);
+    inp.classList.add('ok');
+    fb.className = 'feedback ok';
+    fb.innerHTML = feedbackHtml(it, '✔ 正確！', 'ok', `<div class="fb-line"><span class="fb-label">你的答案</span><span>${esc(val)}</span></div>`);
+    fb.hidden = false; delete it._nbNote;
+    showNext();
+    return;
+  }
+  // 自動比對不到 → 自評
+  q.phase = 'judge'; q.pending = val;
+  inp.classList.add('ask');
+  fb.className = 'feedback ask';
+  fb.innerHTML = `<div class="fb-title">🤔 自動比對沒有找到相同的意思，請自己判斷</div>
+    <div class="fb-line"><span class="fb-label">你的答案</span><span class="fb-mean">${esc(val)}</span></div>
+    <div class="fb-line"><span class="fb-label">標準意思</span><span class="fb-mean">${esc(it.mean)}</span></div>
+    ${it.note ? `<div class="fb-line"><span class="fb-label">補充</span><span>${esc(it.note)}</span></div>` : ''}`;
+  fb.hidden = false;
+  $('judgeBox').hidden = false;
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+}
+function judge(ok){
+  const q = state.quiz; if(!q || q.phase !== 'judge' || modalOpen()) return;
+  const it = q.items[q.idx];
+  const val = q.pending;
+  it._nbNote = finalize(ok, ok ? 'self' : 'selfwrong', val);
+  $('judgeBox').hidden = true;
+  const inp = $('answerInput');
+  inp.classList.remove('ask'); inp.classList.add(ok ? 'ok' : 'bad');
+  const fb = $('feedback');
+  fb.className = 'feedback ' + (ok ? 'ok' : 'bad');
+  fb.innerHTML = feedbackHtml(it, ok ? '✔ 意思相近，算對（自評）' : '✘ 答錯了', ok ? 'ok' : 'bad',
+    `<div class="fb-line"><span class="fb-label">你的答案</span><span>${esc(val)}</span></div>`);
+  delete it._nbNote;
+  showNext();
+}
+
+function next(){
+  const q = state.quiz; if(!q || q.phase !== 'done' || modalOpen()) return;
+  if(Date.now() - q.answeredAt < 250) return;
+  q.idx++;
+  if(q.idx >= q.items.length) showResults();
+  else showQuestion();
+}
+function resumeFocus(){
+  const q = state.quiz; if(!q || $('quiz').hidden) return;
+  let el = null;
+  if(q.phase === 'done') el = $('btnNext');
+  else if(q.mode === 'type') el = $('answerInput');
+  if(el){ try{ el.focus({ preventScroll:true }); }catch(e){ el.focus(); } }
+}
+function openQuitModal(){
+  const q = state.quiz; if(!q || $('quiz').hidden) return;
+  const done = q.records.length;
+  const keepGoing = () => { closeModal(); resumeFocus(); };
+  const actions = [{ label:'繼續作答', cls:'primary autofocus', onClick:keepGoing }];
+  if(done > 0) actions.push({ label:`查看目前成績（已答 ${done} 題）`, onClick:() => { closeModal(); q.endedEarly = true; showResults(); } });
+  actions.push({ label:'放棄並回到設定', cls:'danger', onClick:() => {
+    closeModal(); state.quiz = null; renderNotebook(); updateSetup(); show('setup');
+  }});
+  openModal({
+    title:'要結束這次測驗嗎？',
+    html:`<p>目前在第 ${q.idx + 1} / ${q.items.length} 題，已作答 ${done} 題。</p>` +
+         (done ? '<p>已答錯的單字已經存進錯題本，不會消失。</p>' : ''),
+    actions, onCancel: keepGoing
+  });
+}
+
+// ================= 成績 =================
+function fmtTime(sec){ const m = Math.floor(sec / 60), s = sec % 60; return `${m}:${String(s).padStart(2, '0')}`; }
+function showResults(){
+  const q = state.quiz;
+  const total = q.records.length;
+  const correct = q.records.filter(r => r.ok).length;
+  const selfOk = q.records.filter(r => r.how === 'self').length;
+  const pct = total ? Math.round(correct / total * 100) : 0;
+  const secs = Math.round((Date.now() - q.start) / 1000);
+  const ring = $('scoreRing');
+  ring.style.setProperty('--p', pct);
+  ring.style.setProperty('--rc', pct >= 80 ? 'var(--ok)' : pct >= 60 ? 'var(--brand)' : pct >= 40 ? 'var(--warn)' : 'var(--bad)');
+  $('scorePct').textContent = pct + '%';
+  $('scoreFrac').textContent = `答對 ${correct} / ${total}`;
+  let title;
+  if(pct === 100) title = q.kind === 'normal' ? '🎉 全部答對，太強了！' : '🎉 錯題全部訂正完成！';
+  else if(pct >= 80) title = '👍 很棒！再把錯字補起來';
+  else if(pct >= 60) title = '💪 不錯，繼續加油';
+  else title = '📚 多練幾次，慢慢來';
+  $('resultTitle').textContent = title;
+  const early = q.endedEarly ? `　·　提前結束（完成 ${total} / ${q.items.length} 題）` : '';
+  const selfTxt = selfOk ? `　·　其中 ${selfOk} 題為自評算對` : '';
+  $('resultMeta').textContent = `${modeLabel(q)}　·　用時 ${fmtTime(secs)}${selfTxt}${early}`;
+  const nbTotal = Object.keys(notebook).length;
+  $('resultNb').textContent = `📒 錯題本：本次新增 ${q.nbAdded} 字、移出 ${q.nbRemoved} 字，目前共 ${nbTotal} 字`;
+
+  const seen = new Set(), wrong = [];
+  q.records.forEach(r => { if(!r.ok && !seen.has(r.item.id)){ seen.add(r.item.id); wrong.push(r.item); } });
+  state.lastWrong = wrong;
+  const rw = $('btnRetryWrong');
+  rw.hidden = !wrong.length;
+  rw.textContent = `針對錯題再練習（${wrong.length} 題）`;
+  $('btnCopyWrong').hidden = !wrong.length;
+  const again = $('btnAgain');
+  if(state.origin === 'notebook'){
+    again.textContent = nbTotal ? `再練一次錯題本（${Math.min(nbTotal, NB_MAX)} 題）` : '錯題本已清空';
+    again.disabled = !nbTotal;
+  } else { again.textContent = '重新出題（相同設定）'; again.disabled = false; }
+
+  const list = $('resultList');
+  if(!total) list.innerHTML = '<p class="sub">沒有作答紀錄。</p>';
+  else list.innerHTML = q.records.map((r, i) => {
+    let ans;
+    if(r.how === 'skip') ans = '你的答案：（不知道）';
+    else ans = `你的答案：${esc(r.input)}`;
+    const mark = r.ok ? (r.how === 'self' ? '✔<small>自評</small>' : '✔') : '✘';
+    return `
+    <div class="r-row ${r.ok ? 'ok' : 'bad'}">
+      <div class="r-no">${i + 1}</div>
+      <div>
+        <div class="r-word">${esc(r.item.word)}${r.item.pos ? ` <i>${esc(r.item.pos)}</i>` : ''}</div>
+        <div class="r-mean">${esc(r.item.mean)}</div>
+        <div class="r-ans">${ans}</div>
+      </div>
+      <div class="r-mark">${mark}</div>
+    </div>`;
+  }).join('');
+  renderNotebook();
+  show('result');
+}
+
+// ================= 事件 =================
+let composing = false, composeEnd = 0;
+function bind(){
+  $('btnNbPractice').addEventListener('click', startNotebook);
+  $('btnNbToggle').addEventListener('click', () => { nbOpen = !nbOpen; renderNotebook(); });
+  $('btnNbCopy').addEventListener('click', () => {
+    const list = nbEntries();
+    copyText(list.map(e => wordLine(e.item)).join('\n'), `已複製錯題本 ${list.length} 個單字`);
+  });
+  $('btnNbClear').addEventListener('click', () => {
+    const n = Object.keys(notebook).length;
+    openModal({
+      title:'清空錯題本？',
+      html:`<p>將刪除錯題本裡的 ${n} 個單字與答錯紀錄，無法復原。</p>`,
+      actions:[
+        { label:'確定清空', cls:'danger', onClick:() => { notebook = {}; saveNotebook(); nbOpen = false; closeModal(); renderNotebook(); toast('錯題本已清空'); } },
+        { label:'取消', cls:'primary autofocus', onClick:closeModal }
+      ]
+    });
+  });
+  $('nbList').addEventListener('click', e => {
+    const del = e.target.closest('[data-del]');
+    if(!del) return;
+    const id = del.getAttribute('data-del'), it = BY_ID.get(id);
+    delete notebook[id]; saveNotebook(); renderNotebook();
+    toast(`已從錯題本移除 ${it ? it.word : ''}`);
+  });
+
+  $('btnRand1').addEventListener('click', () => randomThemes(1));
+  $('btnRand3').addEventListener('click', () => randomThemes(3));
+  $('btnRand5').addEventListener('click', () => randomThemes(5));
+  $('btnClear').addEventListener('click', () => { state.themes.clear(); saveSettings(); updateSetup(); });
+
+  const ci = $('countInput');
+  ci.addEventListener('input', onCountInput);
+  ci.addEventListener('blur', commitCount);
+  ci.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); commitCount(); ci.blur(); } });
+  const curCount = () => state.countValid ? state.count : clampCount(parseInt(countRaw(), 10) || state.count);
+  $('countMinus').addEventListener('click', () => setCount(curCount() - 1));
+  $('countPlus').addEventListener('click', () => setCount(curCount() + 1));
+  $('btnStart').addEventListener('click', startNew);
+
+  $('btnMcSkip').addEventListener('click', () => chooseOption(-1));
+  $('btnSubmit').addEventListener('click', () => submitTyped(false));
+  $('btnSkip').addEventListener('click', () => submitTyped(true));
+  $('btnJudgeOk').addEventListener('click', () => judge(true));
+  $('btnJudgeBad').addEventListener('click', () => judge(false));
+  $('btnNext').addEventListener('click', next);
+  $('btnQuit').addEventListener('click', openQuitModal);
+
+  const inp = $('answerInput');
+  inp.addEventListener('compositionstart', () => { composing = true; });
+  inp.addEventListener('compositionend', () => { composing = false; composeEnd = Date.now(); });
+  inp.addEventListener('input', () => { $('inputMsg').textContent = ''; });
+  inp.addEventListener('keydown', e => {
+    if(e.key !== 'Enter') return;
+    if(e.isComposing || e.keyCode === 229 || composing){ return; }   // 中文輸入法選字中
+    e.preventDefault();
+    if(Date.now() - composeEnd < 80) return;                          // Safari：選字確認的 Enter
+    submitTyped(false);
+  });
+  $('answerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if(composing) return;
+    submitTyped(false);
+  });
+
+  $('btnRetryWrong').addEventListener('click', () => {
+    if(!state.lastWrong.length) return;
+    state.round++;
+    startQuiz(shuffle(state.lastWrong.slice()), 'retry', state.quiz ? state.quiz.pool : ALL);
+  });
+  $('btnAgain').addEventListener('click', () => {
+    if(state.origin === 'notebook'){ startNotebook(); return; }
+    if(state.quizThemes.length) state.themes = new Set(state.quizThemes);
+    saveSettings(); updateSetup(); startNew();
+  });
+  $('btnHome').addEventListener('click', () => { state.quiz = null; renderNotebook(); updateSetup(); show('setup'); });
+  $('btnCopyWrong').addEventListener('click', () => {
+    copyText(state.lastWrong.map(wordLine).join('\n'), `已複製 ${state.lastWrong.length} 個錯字`);
+  });
+
+  $('modal').addEventListener('click', e => { if(e.target === $('modal') && modalCancel) modalCancel(); });
+  document.addEventListener('keydown', e => {
+    if(modalOpen()){
+      if(e.key === 'Escape'){ e.preventDefault(); if(modalCancel) modalCancel(); }
+      return;
+    }
+    if($('quiz').hidden) return;
+    const q = state.quiz; if(!q) return;
+    if(e.key === 'Escape'){ e.preventDefault(); openQuitModal(); return; }
+    if(e.target === $('answerInput')) return;
+    if(e.ctrlKey || e.metaKey || e.altKey) return;
+    if(q.phase === 'answer' && q.mode === 'mc' && /^[1-4]$/.test(e.key)){ e.preventDefault(); chooseOption(Number(e.key) - 1); return; }
+    if(q.phase === 'judge'){
+      if(e.key === '1' || e.key.toLowerCase() === 'y'){ e.preventDefault(); judge(true); return; }
+      if(e.key === '2' || e.key.toLowerCase() === 'n'){ e.preventDefault(); judge(false); return; }
+    }
+    if(q.phase === 'done' && e.key === 'Enter' && e.target !== $('btnNext')){ e.preventDefault(); next(); }
+  });
+}
+
+// ================= 啟動 =================
+function init(){
+  loadSettings();
+  loadNotebook();
+  buildThemeGrid();
+  renderMode();
+  renderPos();
+  $('countInput').value = state.count;
+  updateSetup();
+  renderNotebook();
+  bind();
+  $('footer').textContent = `題庫共 ${ALL.length} 個單字，分 ${THEMES.length} 個主題　·　資料來源：精選雅思高頻字彙（開喜雅思同學會）`;
+}
+init();
+})();
+</script>
+</body>
+</html>
